@@ -9,7 +9,7 @@
     $connect = $db->connect();
 
     $movie = new Movie($connect);
-    $movie->id_movie = isset($_GET['id_movie']) ? $_GET['id_movies'] : die();    
+    $movie->id_movie = isset($_GET['id_movie']) ? $_GET['id_movie'] : die();    
 
     $movie->show();
 
