@@ -30,7 +30,7 @@
                 'diễn viên' => $actor,
                 'đạo diễn' => $director,
                 'thời gian' => $time_mv,
-                'thể loại' => $name
+                'thể loại' => $cate
             );
 
             array_push($movie_array['movie'],$movie_item);
