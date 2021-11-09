@@ -23,7 +23,8 @@
         'nội dung' => $movie->detail,
         'diễn viên' => $movie->actor,
         'đạo diễn' => $movie->director,
-        'thời gian' => $movie->time_mv
+        'thời gian' => $movie->time_mv,
+        'Thể loại' => $movie->cate
     );
 
     print_r(json_encode($movie_item));
