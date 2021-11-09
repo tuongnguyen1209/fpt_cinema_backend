@@ -29,7 +29,8 @@
                 'nội dung' => $detail,
                 'diễn viên' => $actor,
                 'đạo diễn' => $director,
-                'thời gian' => $time_mv
+                'thời gian' => $time_mv,
+                'thể loại' => $name
             );
 
             array_push($movie_array['movie'],$movie_item);

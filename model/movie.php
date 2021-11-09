@@ -12,13 +12,15 @@
         public $actor;
         public $director;
         public $time_mv;
+        public $name;
 
         public function __construct($db){
             $this->conn = $db;
         }
 
         public function read(){
-            $query = "SELECT * FROM movie order by id_movie asc";
+            $query = "SELECT mv.id_movie, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,ct.name
+            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie  order by mv.id_movie ";
             
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
