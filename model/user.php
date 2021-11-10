@@ -25,7 +25,7 @@
             $query = "SELECT * FROM user where id_user=? LIMIT 1";
             
             $stmt = $this->conn->prepare($query);
-            $stmt -> bindParam(1, $this->id_movie);
+            $stmt -> bindParam(1, $this->id_user);
             $stmt->execute();
            
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
