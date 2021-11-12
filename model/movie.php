@@ -38,15 +38,15 @@
            
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $this->name = $row['name_mv'];
-            $this->image = $row['image_mv'];
+            $this->name_mv = $row['name_mv'];
+            $this->image_mv = $row['image_mv'];
             $this->traller = $row['traller'];
             $this->date_start = $row['date_start'];
             $this->date_end = $row['date_end'];
             $this->detail = $row['detail'];
             $this->actor = $row['actor'];
             $this->director = $row['director'];
-            $this->time = $row['time_mv'];
+            $this->time_mv = $row['time_mv'];
             $this->cate = $row['cate'];
         }
 
