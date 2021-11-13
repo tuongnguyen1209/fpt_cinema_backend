@@ -136,4 +136,11 @@
             return false;
         }
     }
+
+
+    // function them_the_loai_vao_phim(){ 
+    //     $theloai;
+    //     $ma_the_loai;
+    //     if($the_loai=="")
+    // }
 ?>

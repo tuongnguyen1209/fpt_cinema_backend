@@ -36,40 +36,31 @@
             $this->password = $row['password'];
             $this->status = $row['status'];
         
-    }}
+    }
 
 
-//         public function create(){
-//             $query = "INSERT INTO user set ";
-//             $stmt = $this->conn->prepare($query);
+        public function create(){
+            $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status";
+            $stmt = $this->conn->prepare($query);
 
-//             // Clead Data 
-//             $this->name_mv = htmlspecialchars(strip_tags($this->name_mv));
-//             $this->image_mv = htmlspecialchars(strip_tags($this->image_mv));
-//             $this->traller = htmlspecialchars(strip_tags($this->traller));
-//             $this->date_start = htmlspecialchars(strip_tags($this->date_start));
-//             $this->date_end = htmlspecialchars(strip_tags($this->date_end));
-//             $this->detail = htmlspecialchars(strip_tags($this->detail));
-//             $this->actor = htmlspecialchars(strip_tags($this->actor));
-//             $this->director = htmlspecialchars(strip_tags($this->director));
-//             $this->time_mv = htmlspecialchars(strip_tags($this->time_mv));
+            // Clead Data 
+            $this->full_name = htmlspecialchars(strip_tags($this->full_name));
+            $this->email = htmlspecialchars(strip_tags($this->email));
+            $this->phone = htmlspecialchars(strip_tags($this->phone));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+            $this->status = htmlspecialchars(strip_tags($this->status));
 
-//             $stmt->bindParam(':name_mv' ,$this->name_mv);
-//             $stmt->bindParam(':image_mv' ,$this->image_mv);
-//             $stmt->bindParam(':traller' ,$this->traller);
-//             $stmt->bindParam(':date_start' ,$this->date_start);
-//             $stmt->bindParam(':date_end' ,$this->date_end);
-//             $stmt->bindParam(':detail' ,$this->detail);
-//             $stmt->bindParam(':actor' ,$this->actor);
-//             $stmt->bindParam(':director' ,$this->director);
-//             $stmt->bindParam(':time_mv' ,$this->time_mv);
-
-//             if($stmt->execute()){
-//                 return true;
-//             }
-//             printf("Error %s.\n" ,$stmt->error);
-//             return false;
-//         }
+            $stmt->bindParam(':full_name' ,$this->full_name);
+            $stmt->bindParam(':email' ,$this->email);
+            $stmt->bindParam(':phone' ,$this->phone);
+            $stmt->bindParam(':password' ,$this->password);
+            $stmt->bindParam(':status' ,$this->status);
+            if($stmt->execute()){
+                return true;
+            }
+            printf("Error %s.\n" ,$stmt->error);
+            return false;
+        }
 
 //         public function update(){
 //             $query = "UPDATE movie set name_mv=:name_mv ,image_mv=:image_mv ,traller=:traller ,date_start=:date_start, date_end=:date_end 
@@ -122,5 +113,5 @@
 //             printf("Error %s.\n" ,$stmt->error);
 //             return false;
 //         }
-//     }
+    }
 // ?>
