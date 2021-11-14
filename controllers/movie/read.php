@@ -4,7 +4,7 @@
     $movie = new Movie($connect);
 
     $read = $movie->read();
-
+    
     $num = $read->rowCount();
     if($num>0){
         $movie_array = [];

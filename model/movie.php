@@ -121,13 +121,13 @@
         }
 
         public function delete(){
-            $query = "DELETE FROM movie where id_movie=:id_movie";
+            $query = "DELETE FROM movie where id_movie=?";
             $stmt = $this->conn->prepare($query);
 
             // Clead Data 
             $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
 
-            $stmt->bindParam(':id_movie' ,$this->id_movie);
+            $stmt->bindParam(1,$this->id_movie);
 
             if($stmt->execute()){
                 return true;
