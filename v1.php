@@ -39,6 +39,74 @@ class api extends  R_api{
             include_once "./controllers/banner/delete.php";
         }
     }
+
+
+    public function category()
+    {   include_once "./model/category.php";
+       if($this->method == 'GET'){
+            //   include_once './controllers/category/read.php';
+              include_once './controllers/category/show.php';
+       }
+       else if ($this->method == 'POST') {
+
+            include_once "./controllers/category/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/category/update.php";
+        } else if($this->method== 'DELETE'){
+            include_once "./controllers/category/delete.php";
+        }
+    }
+
+
+    public function combo()
+    {   include_once "./model/combo.php";
+       if($this->method == 'GET'){
+            //   include_once './controllers/combo/read.php';
+              include_once './controllers/combo/show.php';
+       }
+       else if ($this->method == 'POST') {
+
+            include_once "./controllers/combo/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/combo/update.php";
+        } else if($this->method== 'DELETE'){
+            include_once "./controllers/combo/delete.php";
+        }
+    }
+
+
+    public function promotion()
+    {   include_once "./model/promotion.php";
+       if($this->method == 'GET'){
+            //   include_once './controllers/promotion/read.php';
+              include_once './controllers/promotion/show.php';
+       }
+       else if ($this->method == 'POST') {
+
+            include_once "./controllers/promotion/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/promotion/update.php";
+        } else if($this->method== 'DELETE'){
+            include_once "./controllers/promotion/delete.php";
+        }
+    }
+
+
+    public function review()
+    {   include_once "./model/review.php";
+       if($this->method == 'GET'){
+            //   include_once './controllers/review/read.php';
+              include_once './controllers/review/show.php';
+       }
+       else if ($this->method == 'POST') {
+
+            include_once "./controllers/review/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/review/update.php";
+        } else if($this->method== 'DELETE'){
+            include_once "./controllers/review/delete.php";
+        }
+    }
     
 }
 $api = new api();
