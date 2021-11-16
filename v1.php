@@ -23,5 +23,22 @@ class api extends  R_api{
             include_once "./controllers/movie/delete.php";
         }
     }
+
+    public function banner()
+    {   include_once "./model/banner.php";
+       if($this->method == 'GET'){
+            //   include_once './controllers/banner/read.php';
+              include_once './controllers/banner/show.php';
+       }
+       else if ($this->method == 'POST') {
+
+            include_once "./controllers/banner/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/banner/update.php";
+        } else if($this->method== 'DELETE'){
+            include_once "./controllers/banner/delete.php";
+        }
+    }
+    
 }
 $api = new api();
