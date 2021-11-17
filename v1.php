@@ -11,23 +11,37 @@ class api extends  R_api{
     public function movie()
     {   include_once "./model/movie.php";
        if($this->method == 'GET'){
-            //   include_once './controllers/movie/read.php';
               include_once './controllers/movie/show.php';
        }
        else if ($this->method == 'POST') {
-
             include_once "./controllers/movie/create.php";
         } else if ($this->method == 'PUT') {
             include_once "./controllers/movie/update.php";
-        } else if($this->method== 'DELETE'){
+
+        }
+         else if($this->method== 'DELETE'){
             include_once "./controllers/movie/delete.php";
+        }
+    }// chưa xử lí xong
+
+    public function user()
+    {   include_once "./model/user.php";
+       if($this->method == 'GET'){
+              include_once './controllers/user/show.php';
+       }
+       else if ($this->method == 'POST') {
+
+            include_once "./controllers/user/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/user/update.php";
+        } else if($this->method== 'DELETE'){
+            include_once "./controllers/user/delete.php";
         }
     }
 
     public function banner()
     {   include_once "./model/banner.php";
        if($this->method == 'GET'){
-            //   include_once './controllers/banner/read.php';
               include_once './controllers/banner/show.php';
        }
        else if ($this->method == 'POST') {
@@ -35,6 +49,7 @@ class api extends  R_api{
             include_once "./controllers/banner/create.php";
         } else if ($this->method == 'PUT') {
             include_once "./controllers/banner/update.php";
+            
         } else if($this->method== 'DELETE'){
             include_once "./controllers/banner/delete.php";
         }
@@ -93,7 +108,7 @@ class api extends  R_api{
 
 
     public function review()
-    {   include_once "./model/review.php";
+    {   include_once "./model/room.php";
        if($this->method == 'GET'){
             //   include_once './controllers/review/read.php';
               include_once './controllers/review/show.php';
@@ -107,6 +122,19 @@ class api extends  R_api{
             include_once "./controllers/review/delete.php";
         }
     }
+
+    public function room()
+    {   include_once "./model/room.php";
+       if($this->method == 'GET'){
+              include_once './controllers/room/show.php';
+       }}
     
-}
+    
+    public function type_seat()
+    {   include_once "./model/type_seat.php";
+       if($this->method == 'GET'){
+              include_once './controllers/Type_seat/show.php';
+       }}
+    
+    }
 $api = new api();

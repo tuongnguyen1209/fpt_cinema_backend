@@ -5,6 +5,7 @@
     $review = new review($connect);
     $review->id_review = isset($_GET['id_review']) ;
     if($review->id_review){
+        $review->id_review =$_GET['id_review'];
         $review->show();
 
         $review_item = array(

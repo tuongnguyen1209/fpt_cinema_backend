@@ -13,6 +13,8 @@
         public $director;
         public $time_mv;
         public $cate;
+        public $id_cate;
+        public $test;
 
         public function __construct($db){
             $this->conn = $db;
@@ -20,7 +22,7 @@
 
         public function read(){
             $query = "SELECT mv.id_movie, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
-            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie  order by mv.id_movie";
+            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie  order by mv.id_movie LIMIT 0,10"; // chưa xử lí limit
             
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
@@ -76,14 +78,13 @@
             $stmt->bindParam(':actor' ,$this->actor);
             $stmt->bindParam(':director' ,$this->director);
             $stmt->bindParam(':time_mv' ,$this->time_mv);
-
-            if($stmt->execute()){
-                return true;
+            
+            if($stmt->execute()>0){
+               return   $this->conn->lastInsertId();
             }
             printf("Error %s.\n" ,$stmt->error);
             return false;
         }
-
         public function update(){
             $query = "UPDATE movie set name_mv=:name_mv ,image_mv=:image_mv ,traller=:traller ,date_start=:date_start, date_end=:date_end 
             ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv 
@@ -135,12 +136,54 @@
             printf("Error %s.\n" ,$stmt->error);
             return false;
         }
+    
+     public function create_CT_MV(){
+        $query ='INSERT INTO movie_category SET id_category=:id_category, id_movie=:id_movie';
+        $stmt = $this->conn->prepare($query);
+
+        $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
+        $this->id_cate = htmlspecialchars(strip_tags($this->id_cate));
+
+        $stmt->bindParam(':id_movie' ,$this->id_movie);
+        $stmt->bindParam(':id_category' ,$this->id_cate);
+
+        if($stmt->execute()){
+            return true;
+        }
+        printf("Error %s.\n" ,$stmt->error);
+        return false;
     }
 
 
-    // function them_the_loai_vao_phim(){ 
-    //     $theloai;
-    //     $ma_the_loai;
-    //     if($the_loai=="")
-    // }
-?>
+
+    public function update_CT_MV(){
+        $query ='UPDATE movie_category set id_category=:id_category WHERE id_movie=?';
+        $stmt = $this->conn->prepare($query);
+
+        $this->id_cate = htmlspecialchars(strip_tags($this->id_cate));
+
+        $stmt->bindParam(':id_category' ,$this->id_cate);
+
+        if($stmt->execute()){
+            return true;
+        }
+        printf("Error %s.\n" ,$stmt->error);
+        return false;
+    }
+    public function delete_CT_MV(){
+        $query = "DELETE FROM movie_category where id_movie=?";
+        $stmt = $this->conn->prepare($query);
+
+        // Clead Data 
+        $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
+
+        $stmt->bindParam(1,$this->id_movie);
+
+        if($stmt->execute()){
+            return true;
+        }
+        printf("Error %s.\n" ,$stmt->error);
+        return false;
+    }
+
+    }

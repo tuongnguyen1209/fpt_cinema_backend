@@ -17,11 +17,9 @@
     $movie->actor = $data->actor;
     $movie->director = $data->director;
     $movie->time_mv = $data->time_mv;
-
+    
     if($movie->update() == true){
         echo json_encode(array('message','Qestion Update'));
     }else{
         echo json_encode(array('message','Qestion Not Update'));
     }
-
-?>

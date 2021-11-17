@@ -4,10 +4,10 @@
 
     $movie = new Movie($connect);
     $movie->id_movie = isset($_GET['id_movie']);
+
     if($movie->id_movie){
         $movie->id_movie = ($_GET['id_movie']);
         $movie->show();
-
         $movie_item = array(
             'id_movie' => $movie->id_movie,
             'tên phim' => $movie->name_mv,
@@ -21,8 +21,7 @@
             'thời gian' => $movie->time_mv,
             'Thể loại' => $movie->cate
         );
-
-        print_r(json_encode($movie_item));
+        $this->response(200,$movie_item);
     }else{
         $read = $movie->read();
     
@@ -50,8 +49,6 @@
     
                 array_push($movie_array['movie'],$movie_item);
             }
-            echo json_encode($movie_array);
+            $this->response(200,$movie_array);
         }
     }
-    
-?>

@@ -5,6 +5,7 @@
     $promotion  = new promotion($connect);
     $promotion->id_promotion  = isset($_GET['id_promotion']) ;    
     if($promotion->id_promotion){
+        $promotion->id_promotion =$_GET['id_promotion'];
         $promotion->show();
 
         $promotion_item = array(
