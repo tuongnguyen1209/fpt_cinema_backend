@@ -26,7 +26,7 @@ if ($category->id_category) {
             extract($row);
 
             $category_item = array(
-                'id_category ' => $id_category,
+                'id_category' => $id_category,
                 'name_category' => $name
             );
 
