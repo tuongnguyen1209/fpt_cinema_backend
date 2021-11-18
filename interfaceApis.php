@@ -69,7 +69,7 @@ class R_api
         // header('Content-Type: application/json; charset = utf-8;');
         // echo json_encode($data);
         // die();
-        // header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Origin: *');
         header('content-type: application/json');
         echo json_encode($data);
         die();
