@@ -16,17 +16,23 @@ $movie->detail = $data->detail;
 $movie->actor = $data->actor;
 $movie->director = $data->director;
 $movie->time_mv = $data->time_mv;
+$movie->banner  = $data->banner;
+$movie->rate  = $data->rate;
+$movie->status = $data->status;
+$movie->country = $data->country;
+$movie->production = $data->production;
 
-$ar = $data->id_cate;
-print_r($ar);
-if ($movie->update()) {
+$movie->update();
+// $ar = $data->id_cate;
+// print_r($ar);
+// if ($movie->update()) {
 
 
-    for ($i = 0; $i < count($ar); $i++) {
-        $movie->id_cate = $data->id_cate = $ar[$i];
-        $movie->update_CT_MV();
-    }
-}
+//     for ($i = 0; $i < count($ar); $i++) {
+//         $movie->id_cate = $data->id_cate = $ar[$i];
+//         $movie->update_CT_MV();
+//     }
+// }
 
 //    if() echo json_encode(array('message', 'Qestion Created'));
 // } else {

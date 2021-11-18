@@ -17,11 +17,11 @@ if ($movie->id_movie) {
         'traller phim' => $movie->traller,
         'ngày bắt đầu' => $movie->date_start,
         'ngày kết thúc' => $movie->date_end,
-        'nội dung' => $movie->detail,
+        // 'nội dung' => $movie->detail,
         'diễn viên' => $movie->actor,
         'đạo diễn' => $movie->director,
         'thời gian' => $movie->time_mv,
-        'Thể loại' => $movie->cate
+        // 'Thể loại' => $movie->cate
     );
     $this->response(200, $movie_item);
 } else {
@@ -32,7 +32,6 @@ if ($movie->id_movie) {
         $movie_array['movie'] = [];
 
         while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
-            print_r($row);
             extract($row);
 
             $movie_item = array(
@@ -46,6 +45,9 @@ if ($movie->id_movie) {
                 'diễn viên' => $actor,
                 'đạo diễn' => $director,
                 'thời gian' => $time_mv,
+                "country" => $country,
+                "production" => $production,
+                "name_vn" => $name_vn,
                 'thể loại' => $cate
             );
 

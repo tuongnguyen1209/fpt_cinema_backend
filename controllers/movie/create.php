@@ -14,6 +14,13 @@ $movie->detail = $data->detail;
 $movie->actor = $data->actor;
 $movie->director = $data->director;
 $movie->time_mv = $data->time_mv;
+$movie->banner  = $data->banner;
+$movie->rate  = $data->rate;
+$movie->status = $data->status;
+$movie->country = $data->country;
+$movie->production = $data->production;
+$movie->name_vn = $data->name_vn;
+
 
 $ar = $data->id_cate;
 if ($lastID = $movie->create()) {

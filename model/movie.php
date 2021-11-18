@@ -15,7 +15,11 @@ class Movie
     public $time_mv;
     public $cate;
     public $id_cate;
-    public $test;
+    public $banner;
+    public $status;
+    public $name_vn;
+    public $country;
+    public $production;
 
     public function __construct($db)
     {
@@ -24,7 +28,7 @@ class Movie
 
     public function read()
     {
-        $query = "SELECT mv.id_movie, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
+        $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
             FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie  order by mv.id_movie LIMIT 0,10"; // chưa xử lí limit
 
         $stmt = $this->conn->prepare($query);
@@ -60,7 +64,7 @@ class Movie
     public function create()
     {
         $query = "INSERT INTO movie set name_mv=:name_mv, image_mv=:image_mv, traller=:traller, date_start=:date_start, date_end=:date_end 
-            ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv ";
+            ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production,rate=:rate ";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -74,6 +78,14 @@ class Movie
         $this->director = htmlspecialchars(strip_tags($this->director));
         $this->time_mv = htmlspecialchars(strip_tags($this->time_mv));
 
+        $this->banner = htmlspecialchars(strip_tags($this->banner));
+        $this->status = htmlspecialchars(strip_tags($this->status));
+        $this->name_vn = htmlspecialchars(strip_tags($this->name_vn));
+        $this->country = htmlspecialchars(strip_tags($this->country));
+        $this->production = htmlspecialchars(strip_tags($this->production));
+        $this->rate = htmlspecialchars(strip_tags($this->rate));
+
+
         $stmt->bindParam(':name_mv', $this->name_mv);
         $stmt->bindParam(':image_mv', $this->image_mv);
         $stmt->bindParam(':traller', $this->traller);
@@ -84,6 +96,13 @@ class Movie
         $stmt->bindParam(':director', $this->director);
         $stmt->bindParam(':time_mv', $this->time_mv);
 
+        $stmt->bindParam(':banner', $this->banner);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':name_vn', $this->name_vn);
+        $stmt->bindParam(':country', $this->country);
+        $stmt->bindParam(':production', $this->production);
+        $stmt->bindParam(':rate', $this->rate);
+
         if ($stmt->execute() > 0) {
             return   $this->conn->lastInsertId();
         }
@@ -92,11 +111,12 @@ class Movie
     }
     public function update()
     {
-        $query = "UPDATE movie set name_mv=:name_mv ,image_mv=:image_mv ,traller=:traller ,date_start=:date_start, date_end=:date_end 
-            ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv 
+        $query = "UPDATE  movie set name_mv=:name_mv, image_mv=:image_mv, traller=:traller, date_start=:date_start, date_end=:date_end 
+        ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production 
             where id_movie=:id_movie";
         $stmt = $this->conn->prepare($query);
 
+        // Clead Data 
         // Clead Data 
         $this->name_mv = htmlspecialchars(strip_tags($this->name_mv));
         $this->image_mv = htmlspecialchars(strip_tags($this->image_mv));
@@ -108,6 +128,12 @@ class Movie
         $this->director = htmlspecialchars(strip_tags($this->director));
         $this->time_mv = htmlspecialchars(strip_tags($this->time_mv));
         $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
+        $this->banner = htmlspecialchars(strip_tags($this->banner));
+        $this->status = htmlspecialchars(strip_tags($this->status));
+        $this->name_vn = htmlspecialchars(strip_tags($this->name_vn));
+        $this->country = htmlspecialchars(strip_tags($this->country));
+        $this->production = htmlspecialchars(strip_tags($this->production));
+
 
         $stmt->bindParam(':name_mv', $this->name_mv);
         $stmt->bindParam(':image_mv', $this->image_mv);
@@ -119,6 +145,11 @@ class Movie
         $stmt->bindParam(':director', $this->director);
         $stmt->bindParam(':time_mv', $this->time_mv);
         $stmt->bindParam(':id_movie', $this->id_movie);
+        $stmt->bindParam(':banner', $this->banner);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':name_vn', $this->name_vn);
+        $stmt->bindParam(':country', $this->country);
+        $stmt->bindParam(':production', $this->production);
 
         if ($stmt->execute()) {
             return true;
