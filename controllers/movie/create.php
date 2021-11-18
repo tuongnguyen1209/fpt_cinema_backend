@@ -29,7 +29,8 @@ if ($lastID = $movie->create()) {
         $movie->id_cate = $data->id_cate = $ar[$i];
         $movie->create_CT_MV();
     }
-    echo json_encode(array('message', 'Qestion Created'));
+    $this->response(200, array('message', 'Qestion Created'));
 } else {
+    $this->response(200, array('message', 'Qestion Not Created'));
     echo json_encode(array('message', 'Qestion Not Created'));
 }
