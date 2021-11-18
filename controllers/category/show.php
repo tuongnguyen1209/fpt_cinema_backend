@@ -27,7 +27,7 @@ if ($category->id_category) {
 
             $category_item = array(
                 'id_category ' => $id_category,
-                'Tên thể loại' => $name
+                'name_category' => $name
             );
 
             array_push($category_array['category'], $category_item);
