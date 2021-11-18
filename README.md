@@ -7,7 +7,10 @@ fpt_cinema_backend
 │  ├─ banner
 │  │  └─ show.php
 │  ├─ category
-│  │  └─ show.php
+│  │  ├─ create.php
+│  │  ├─ delete.php
+│  │  ├─ show.php
+│  │  └─ update.php
 │  ├─ combo
 │  │  └─ show.php
 │  ├─ movie
@@ -19,11 +22,17 @@ fpt_cinema_backend
 │  │  └─ show.php
 │  ├─ review
 │  │  └─ show.php
+│  ├─ room
+│  │  └─ show.php
+│  ├─ Type_seat
+│  │  └─ show.php
 │  └─ user
 │     ├─ create.php
 │     ├─ read.php
 │     ├─ show.php
 │     └─ update.php
+├─ image
+│  └─ bw.jpg
 ├─ index.php
 ├─ interfaceApis.php
 ├─ model
@@ -33,6 +42,8 @@ fpt_cinema_backend
 │  ├─ movie.php
 │  ├─ promotion.php
 │  ├─ review.php
+│  ├─ room.php
+│  ├─ type_seat.php
 │  └─ user.php
 ├─ README.md
 └─ v1.php
