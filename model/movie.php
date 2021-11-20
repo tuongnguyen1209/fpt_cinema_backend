@@ -20,16 +20,31 @@ class Movie
     public $name_vn;
     public $country;
     public $production;
+    public $sort;
 
     public function __construct($db)
     {
         $this->conn = $db;
     }
 
-    public function read()
+    public function read($page = 1, $sort = false, $limit = 10)
     {
         $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
-            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie  order by mv.id_movie LIMIT 0,10"; // chưa xử lí limit
+        FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie"; // chưa xử lí limit
+
+        if ($sort == "id") {
+            $query .= " order by mv.id_movie   ";
+        } else if ($sort == "day") {
+            $query .= " order by mv.date_start ";
+        } elseif ($sort == "name") {
+            $query .= " ORDER BY mv.name_mv  ";
+        }
+
+        $start = $limit * ($page - 1);
+        // $end = $start + $limit;
+        $end = $limit;
+        $query .= "LIMIT $start, $end";
+
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -38,9 +53,7 @@ class Movie
 
     public function show()
     {
-        $query = "SELECT mv.id_movie, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
-            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category
-            WHERE mv.id_movie=?  GROUP BY mv.id_movie  order by mv.id_movie LIMIT 1 ;";
+        $query = "call movie_show_one(?)";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_movie);
@@ -59,6 +72,16 @@ class Movie
         $this->time_mv = $row['time_mv'];
         $this->cate = $row['cate'];
     }
+
+    public function read_day_start()
+    {
+
+        $query = "SELECT * From movie GROUP BY date_start order by id_movie";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id_movie);
+        $stmt->execute();
+    }
+
 
 
     public function create()
@@ -112,7 +135,7 @@ class Movie
     public function update()
     {
         $query = "UPDATE  movie set name_mv=:name_mv, image_mv=:image_mv, traller=:traller, date_start=:date_start, date_end=:date_end 
-        ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production 
+        ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production,rate=:rate
             where id_movie=:id_movie";
         $stmt = $this->conn->prepare($query);
 
@@ -133,6 +156,7 @@ class Movie
         $this->name_vn = htmlspecialchars(strip_tags($this->name_vn));
         $this->country = htmlspecialchars(strip_tags($this->country));
         $this->production = htmlspecialchars(strip_tags($this->production));
+        $this->rate = htmlspecialchars(strip_tags($this->rate));
 
 
         $stmt->bindParam(':name_mv', $this->name_mv);
@@ -149,7 +173,9 @@ class Movie
         $stmt->bindParam(':status', $this->status);
         $stmt->bindParam(':name_vn', $this->name_vn);
         $stmt->bindParam(':country', $this->country);
+        $stmt->bindParam(':rate', $this->rate);
         $stmt->bindParam(':production', $this->production);
+
 
         if ($stmt->execute()) {
             return true;
@@ -193,36 +219,35 @@ class Movie
         return false;
     }
 
-    public function update_CT_MV()
-    {
-        $query = "UPDATE movie_category set id_category=:id_category where id_movie=:id_movie";
-        $stmt = $this->conn->prepare($query);
+    // public function update_CT_MV()
+    // {
+    //     $query = "UPDATE movie_category set id_category=:id_category where id_movie=:id_movie";
+    //     $stmt = $this->conn->prepare($query);
 
-        // Clead Data 
+    //     // Clead Data 
 
-        $this->time_mv = htmlspecialchars(strip_tags($this->id_cate));
-        $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
+    //     $this->time_mv = htmlspecialchars(strip_tags($this->id_cate));
+    //     $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
 
-        $stmt->bindParam(':id_movie', $this->id_movie);
-        $stmt->bindParam(':id_category', $this->id_cate);
+    //     $stmt->bindParam(':id_movie', $this->id_movie);
+    //     $stmt->bindParam(':id_category', $this->id_cate);
 
-        if ($stmt->execute()) {
-            return true;
-        }
-        printf("Error %s.\n", $stmt->error);
-        return false;
-    }
+    //     if ($stmt->execute()) {
+    //         return true;
+    //     }
+    //     printf("Error %s.\n", $stmt->error);
+    //     return false;
+    // }
     public function delete_CT_MV()
     {
-        $query = "DELETE FROM movie_category where id_movie=? AND id_category=?";
+        $query = "DELETE FROM movie_category where id_movie=?";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
         $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
-        $this->id_category = htmlspecialchars(strip_tags($this->id_category));
 
         $stmt->bindParam(1, $this->id_movie);
-        $stmt->bindParam(1, $this->id_category);
+
 
         if ($stmt->execute()) {
             return true;
