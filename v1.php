@@ -137,5 +137,21 @@ class api extends  R_api
             include_once './controllers/Type_seat/show.php';
         }
     }
+
+    public function session()
+    {
+        include_once "./model/session.php";
+        if ($this->method == 'GET') {
+            include_once './controllers/session/show.php';
+        } else if ($this->method == 'POST') {
+
+            include_once "./controllers/session/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/session/update.php";
+        } else if ($this->method == 'DELETE') {
+            include_once "./controllers/session/delete.php";
+        }
+    }
+
 }
 $api = new api();
