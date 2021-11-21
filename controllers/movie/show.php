@@ -25,9 +25,9 @@ if ($movie->id_movie) {
     );
     $this->response(200, $movie_item);
 } else {
-    $sort = isset($_GET["sort"]) ? $_GET["sort"] : die();
-    $page = isset($_GET["page"]) ? $_GET["page"] : die();
-    $read = $movie->read($page, $sort, $limit = 3);
+    $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
+    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+    $read = $movie->read($page, $sort,  10);
     $num = $read->rowCount();
     if ($num > 0) {
         $movie_array = [];

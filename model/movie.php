@@ -42,8 +42,8 @@ class Movie
 
         $start = $limit * ($page - 1);
         // $end = $start + $limit;
-        $end = $limit;
-        $query .= "LIMIT $start, $end";
+        $end = $limit + $start;
+        $query .= " LIMIT $start, $end";
 
 
         $stmt = $this->conn->prepare($query);

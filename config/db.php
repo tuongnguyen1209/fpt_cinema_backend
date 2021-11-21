@@ -8,7 +8,7 @@ class db
     private $database;
     private $conn;
 
-    function __construct()
+    public  function __construct()
     {
         if (!$this->checkProduction()) {
             $this->username = "b5a9ccdd772ea3";
