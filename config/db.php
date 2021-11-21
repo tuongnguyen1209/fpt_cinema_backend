@@ -1,19 +1,32 @@
 <?php
 class db
 {
-    private $username = "root";
-    private $password = "";
-    private $host = "localhost";
-    private $database = 'project_cinema';
+
+    private $username;
+    private $password;
+    private $host;
+    private $database;
     private $conn;
-    // private $username = "b5a9ccdd772ea3";
-    // private $password = "df4e10ec";
-    // private $host = "us-cdbr-east-04.cleardb.com";
-    // private $database = 'heroku_1cd49e7abd7fcd4';
-    // private $conn;
+
+    function __construct()
+    {
+        if (!$this->checkProduction()) {
+            $this->username = "b5a9ccdd772ea3";
+            $this->password = "df4e10ec";
+            $this->host = "us-cdbr-east-04.cleardb.com";
+            $this->database = 'heroku_1cd49e7abd7fcd4';
+        } else {
+            $this->username = "root";
+            $this->password =  "";
+            $this->host =  "localhost";
+            $this->database = 'project_cinema';
+        }
+    }
+
 
     public function connect()
     {
+
         $this->conn = null;
         try {
             $this->conn = new PDO("mysql:host=" . $this->host . "; dbname=" . $this->database . "", $this->username, $this->password);
@@ -23,5 +36,11 @@ class db
             echo "Errol" . $e->getMessage();
         }
         return $this->conn;
+    }
+    private function checkProduction()
+    {
+        if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1')
+            return true;
+        return false;
     }
 }

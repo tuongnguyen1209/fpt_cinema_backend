@@ -152,6 +152,5 @@ class api extends  R_api
             include_once "./controllers/session/delete.php";
         }
     }
-
 }
 $api = new api();
