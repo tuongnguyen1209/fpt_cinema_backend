@@ -27,7 +27,7 @@ class Movie
         $this->conn = $db;
     }
 
-    public function read($page = 1, $sort = false, $limit = 10)
+    public function read($page = 1, $sort = false, $limit = 4)
     {
         $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
         FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie"; // chưa xử lí limit
@@ -41,8 +41,11 @@ class Movie
         }
 
         $start = $limit * ($page - 1);
-        // $end = $start + $limit;
-        $end = $limit + $start;
+        if ($start >= 1) {
+            $end = $limit + $start;
+        } else {
+            $end = $limit;
+        }
         $query .= " LIMIT $start, $end";
 
 

@@ -17,17 +17,18 @@ if ($movie->id_movie) {
         'traller phim' => $movie->traller,
         'ngày bắt đầu' => $movie->date_start,
         'ngày kết thúc' => $movie->date_end,
-        // 'nội dung' => $movie->detail,
+        'nội dung' => $movie->detail,
         'diễn viên' => $movie->actor,
         'đạo diễn' => $movie->director,
         'thời gian' => $movie->time_mv,
-        // 'Thể loại' => $movie->cate
+        'Thể loại' => $movie->cate
     );
     $this->response(200, $movie_item);
 } else {
     $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-    $read = $movie->read($page, $sort,  10);
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 1;
+    $read = $movie->read($page, $sort,  $limit);
     $num = $read->rowCount();
     if ($num > 0) {
         $movie_array = [];
