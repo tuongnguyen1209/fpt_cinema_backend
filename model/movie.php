@@ -53,7 +53,8 @@ class Movie
 
     public function show()
     {
-        $query = "call movie_show_one(?)";
+        $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
+        FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category WHERE mv.id_movie=? GROUP BY mv.id_movie";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_movie);
