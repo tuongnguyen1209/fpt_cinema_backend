@@ -15,6 +15,7 @@ class Movie
     public $time_mv;
     public $cate;
     public $id_cate;
+
     public $banner;
     public $status;
     public $name_vn;
@@ -56,8 +57,8 @@ class Movie
 
     public function show()
     {
-        $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
-        FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category WHERE mv.id_movie=? GROUP BY mv.id_movie";
+        $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate, sts.time_start,sts.time_end,se.day_start,se.day_end
+        FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category INNER JOIN session se on mv.id_movie=se.id_movie  INNER JOIN showtimes sts on sts.id_showtimes =se.id_showtimes  WHERE mv.id_movie=? GROUP BY mv.id_movie";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_movie);
@@ -75,6 +76,10 @@ class Movie
         $this->director = $row['director'];
         $this->time_mv = $row['time_mv'];
         $this->cate = $row['cate'];
+        $this->time_start = $row['time_start'];
+        $this->time_end = $row['time_end'];
+        $this->day_start = $row['day_start'];
+        $this->day_end = $row['day_end'];
     }
 
     public function read_day_start()

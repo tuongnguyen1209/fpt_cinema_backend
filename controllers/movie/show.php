@@ -21,7 +21,11 @@ if ($movie->id_movie) {
         'diễn viên' => $movie->actor,
         'đạo diễn' => $movie->director,
         'thời gian' => $movie->time_mv,
-        'Thể loại' => $movie->cate
+        'Thể loại' => $movie->cate,
+        'day_start' => $movie->day_start,
+        'day_end' => $movie->day_end,
+        'time_start' => $movie->time_start,
+        'time_end' => $movie->time_end
     );
     $this->response(200, $movie_item);
 } else {
