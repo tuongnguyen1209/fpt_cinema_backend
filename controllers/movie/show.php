@@ -31,7 +31,7 @@ if ($movie->id_movie) {
 } else {
     $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 1;
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 10;
     $read = $movie->read($page, $sort,  $limit);
     $num = $read->rowCount();
     if ($num > 0) {

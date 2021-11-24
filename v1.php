@@ -130,11 +130,13 @@ class api extends  R_api
     }
 
 
-    public function type_seat()
+    public function ticket()
     {
-        include_once "./model/type_seat.php";
+        include_once "./model/ticket.php";
         if ($this->method == 'GET') {
-            include_once './controllers/Type_seat/show.php';
+            include_once './controllers/ticket/show.php';
+        } else if ($this->method == 'POST') {
+            include_once './controllers/ticket/create.php';
         }
     }
 

@@ -7,4 +7,8 @@ $movie = new Movie($connect);
 
 $data = json_decode(file_get_contents("php://input"));
 $movie->id_movie = isset($_GET['id_movie']) ? $_GET['id_movie'] : 1;
-$movie->delete();
+if ($movie->delete()) {
+    $this->response(200, array('message', 'Qestion delete'));
+} else {
+    $this->response(200, array('message', 'Qestion Not Delete'));
+}

@@ -21,7 +21,6 @@ class Movie
     public $name_vn;
     public $country;
     public $production;
-    public $sort;
 
     public function __construct($db)
     {
@@ -30,16 +29,22 @@ class Movie
 
     public function read($page = 1, $sort = false, $limit = 4)
     {
-        $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
-        FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie"; // chưa xử lí limit
+        // $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
+        // FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie"; // chưa xử lí limit
 
-        if ($sort == "id") {
-            $query .= " order by mv.id_movie   ";
-        } else if ($sort == "day") {
-            $query .= " order by mv.date_start ";
-        } elseif ($sort == "name") {
-            $query .= " ORDER BY mv.name_mv  ";
-        }
+        // if ($sort == "id") {
+        //     $query .= " order by mv.id_movie   ";
+        // } elseif ($sort == "id_DESC") {
+        //     $query .= " order by mv.id_movie DESC   ";
+        // } else if ($sort == "day") {
+        //     $query .= " order by mv.date_start ";
+        // } elseif ($sort == "day_DESC") {
+        //     $query .= " order by mv.date_start DESC ";
+        // } elseif ($sort == "name") {
+        //     $query .= " ORDER BY mv.name_mv  ";
+        // } elseif ($sort == "name_DESC") {
+        //     $query .= " ORDER BY mv.name_mv DESC  ";
+        // };
 
         $start = $limit * ($page - 1);
         if ($start >= 1) {
@@ -47,19 +52,23 @@ class Movie
         } else {
             $end = $limit;
         }
-        $query .= " LIMIT $start, $end";
-
-
+        // $query .= " LIMIT $start, $end";
+        $query = " call movie_show_name(?,?)";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $start);
+        $stmt->bindParam(2, $end);
+
+        // $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }
 
     public function show()
     {
-        $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate, sts.time_start,sts.time_end,se.day_start,se.day_end
-        FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category INNER JOIN session se on mv.id_movie=se.id_movie  INNER JOIN showtimes sts on sts.id_showtimes =se.id_showtimes  WHERE mv.id_movie=? GROUP BY mv.id_movie";
+        // $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate, sts.time_start,sts.time_end,se.day_start,se.day_end
+        // FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category INNER JOIN session se on mv.id_movie=se.id_movie  INNER JOIN showtimes sts on sts.id_showtimes =se.id_showtimes  WHERE mv.id_movie=? GROUP BY mv.id_movie";
 
+        $query = "call movie_show(?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_movie);
         $stmt->execute();
@@ -195,7 +204,8 @@ class Movie
 
     public function delete()
     {
-        $query = "DELETE FROM movie where id_movie=?";
+        // $query = "DELETE FROM movie where id_movie=?";
+        $query = " call movie_delete(?)";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 

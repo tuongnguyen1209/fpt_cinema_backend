@@ -2,7 +2,6 @@
 class user
 {
     private $conn;
-
     public $id_user;
     public $full_name;
     public $email;
@@ -68,8 +67,7 @@ class user
 
     public function update()
     {
-        $query = "UPDATE user setfull_name=:full_name, email=:email, phone=:phone, password=:password,status=:status
-            where id_user=:id_user";
+        $query = "UPDATE user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status where id_user=:id_user";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -85,7 +83,7 @@ class user
         $stmt->bindParam(':phone', $this->phone);
         $stmt->bindParam(':password', $this->password);
         $stmt->bindParam(':status', $this->status);
-        $stmt->bindParam(':id_user', $this->status);
+        $stmt->bindParam(':id_user', $this->id_user);
 
         if ($stmt->execute()) {
             return true;
