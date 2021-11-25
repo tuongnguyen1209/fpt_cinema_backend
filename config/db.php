@@ -11,10 +11,10 @@ class db
     public  function __construct()
     {
         if (!$this->checkProduction()) {
-            $this->username = "b5a9ccdd772ea3";
-            $this->password = "df4e10ec";
-            $this->host = "us-cdbr-east-04.cleardb.com";
-            $this->database = 'heroku_1cd49e7abd7fcd4';
+            // $this->username = "b5a9ccdd772ea3";
+            // $this->password = "df4e10ec";
+            // $this->host = "us-cdbr-east-04.cleardb.com";
+            // $this->database = 'heroku_1cd49e7abd7fcd4';
         } else {
             $this->username = "root";
             $this->password =  "";

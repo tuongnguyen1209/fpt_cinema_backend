@@ -31,29 +31,26 @@ class Movie
     {
         // $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
         // FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.id_movie"; // chưa xử lí limit
-
-        // if ($sort == "id") {
-        //     $query .= " order by mv.id_movie   ";
-        // } elseif ($sort == "id_DESC") {
-        //     $query .= " order by mv.id_movie DESC   ";
-        // } else if ($sort == "day") {
-        //     $query .= " order by mv.date_start ";
-        // } elseif ($sort == "day_DESC") {
-        //     $query .= " order by mv.date_start DESC ";
-        // } elseif ($sort == "name") {
-        //     $query .= " ORDER BY mv.name_mv  ";
-        // } elseif ($sort == "name_DESC") {
-        //     $query .= " ORDER BY mv.name_mv DESC  ";
-        // };
-
         $start = $limit * ($page - 1);
-        if ($start >= 1) {
-            $end = $limit + $start;
-        } else {
-            $end = $limit;
+        // if ($start >= 1) {
+        // $end = $limit + $start;
+        // } else {
+        $end = $limit;
+        // }
+
+        if ($sort == "id" || $sort == "") {
+            $query = " call movie_show_id(?,?) ";
+        } elseif ($sort == "id_desc") {
+            $query = " call movie_show_id_DESC(?,?)";
+        } else if ($sort == "day") {
+            $query = " call movie_show_day(?,?) ";
+        } elseif ($sort == "day_desc") {
+            $query = " call movie_show_day_DESC(?,?) ";
+        } elseif ($sort == "name") {
+            $query = " call movie_show_name(?,?)  ";
+        } elseif ($sort == "name_DESC") {
+            $query = " call movie_show_name_DESC(?,?)  ";
         }
-        // $query .= " LIMIT $start, $end";
-        $query = " call movie_show_name(?,?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $start);
         $stmt->bindParam(2, $end);
@@ -68,7 +65,7 @@ class Movie
         // $query = "SELECT mv.id_movie,mv.banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.image_mv,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate, sts.time_start,sts.time_end,se.day_start,se.day_end
         // FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category INNER JOIN session se on mv.id_movie=se.id_movie  INNER JOIN showtimes sts on sts.id_showtimes =se.id_showtimes  WHERE mv.id_movie=? GROUP BY mv.id_movie";
 
-        $query = "call movie_show(?)";
+        $query = "call movie_show_one(?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_movie);
         $stmt->execute();
@@ -104,8 +101,8 @@ class Movie
 
     public function create()
     {
-        $query = "INSERT INTO movie set name_mv=:name_mv, image_mv=:image_mv, traller=:traller, date_start=:date_start, date_end=:date_end 
-            ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production,rate=:rate ";
+        $query = "INSERT INTO `movie`(`name_mv`, `image_mv`, `traller`, `date_start`, `date_end`, `detail`, `actor`, `director`, `time_mv`, `banner`, `name_vn`, `status`, `country`, `production`, `rate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        // $query = "call movie_create(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -127,22 +124,22 @@ class Movie
         $this->rate = htmlspecialchars(strip_tags($this->rate));
 
 
-        $stmt->bindParam(':name_mv', $this->name_mv);
-        $stmt->bindParam(':image_mv', $this->image_mv);
-        $stmt->bindParam(':traller', $this->traller);
-        $stmt->bindParam(':date_start', $this->date_start);
-        $stmt->bindParam(':date_end', $this->date_end);
-        $stmt->bindParam(':detail', $this->detail);
-        $stmt->bindParam(':actor', $this->actor);
-        $stmt->bindParam(':director', $this->director);
-        $stmt->bindParam(':time_mv', $this->time_mv);
+        $stmt->bindParam(1, $this->name_mv);
+        $stmt->bindParam(2, $this->image_mv);
+        $stmt->bindParam(3, $this->traller);
+        $stmt->bindParam(4, $this->date_start);
+        $stmt->bindParam(5, $this->date_end);
+        $stmt->bindParam(6, $this->detail);
+        $stmt->bindParam(7, $this->actor);
+        $stmt->bindParam(8, $this->director);
+        $stmt->bindParam(9, $this->time_mv);
 
-        $stmt->bindParam(':banner', $this->banner);
-        $stmt->bindParam(':status', $this->status);
-        $stmt->bindParam(':name_vn', $this->name_vn);
-        $stmt->bindParam(':country', $this->country);
-        $stmt->bindParam(':production', $this->production);
-        $stmt->bindParam(':rate', $this->rate);
+        $stmt->bindParam(10, $this->banner);
+        $stmt->bindParam(12, $this->status);
+        $stmt->bindParam(11, $this->name_vn);
+        $stmt->bindParam(13, $this->country);
+        $stmt->bindParam(14, $this->production);
+        $stmt->bindParam(15, $this->rate);
 
         if ($stmt->execute() > 0) {
             return   $this->conn->lastInsertId();
