@@ -11,6 +11,7 @@ if ($session->id_session) {
         'id_session' => $session->id_session,
         'name_mv' => $session->name_mv,
         'room_number' => $session->name,
+        'day' => $session->day,
         'time_start' => $session->time_start,
         'time_end' => $session->time_end,
         'type' => $session->type
@@ -31,6 +32,7 @@ if ($session->id_session) {
                 'id_session' => $id_session,
                 'name_mv' => $name_mv,
                 'room_number' => $name,
+                'day' => $day,
                 'date_start' => $time_start,
                 'date_end' => $time_end,
                 'type' => $type
