@@ -31,24 +31,35 @@ if ($ticket->id_ticket) {
         while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
 
-            $ticket_item = array(
-                "full_name" => $full_name,
-                "id_tickets" => $id_ticket,
-                "name_mv" => $name_mv,
-                "date_start" => $day_start,
-                "time_start" => $time_start,
-                "combo" => $Combo,
-                "id_seat" => $id_seat,
-                "id_room" => $id_room,
-                "ticket_information" => $ticket_information,
-                "status" => $status,
-                "Total_money" => $Total_money,
-            );
+            $arr = [];
+            $listTiketSeat =  $ticket->getTiketSeat($id_ticket);
+            while ($row2 =  $listTiketSeat->fetch(PDO::FETCH_ASSOC))
 
-            array_push($ticket_array['ticket'], $ticket_item);
+                print_r($row2);
+
+            $listTiketCombo =  $ticket->getTiketCombo($id_ticket);
+            while ($row3 =  $listTiketCombo->fetch(PDO::FETCH_ASSOC))
+
+                print_r($row3);
+
+            // $ticket_item = array(
+            //     "full_name" => $full_name,
+            //     "id_tickets" => $id_ticket,
+            //     "name_mv" => $name_mv,
+            //     "date_start" => $day_start,
+            //     "time_start" => $time_start,
+            //     "combo" => $Combo,
+            //     "id_seat" => $id_seat,
+            //     "id_room" => $id_room,
+            //     "ticket_information" => $ticket_information,
+            //     "status" => $status,
+            //     "Total_money" => $Total_money,
+            // );
+
+            // array_push($ticket_array['ticket'], $ticket_item);
         }
 
 
-        $this->response(200, $ticket_array);
+        // $this->response(200, $ticket_array);
     }
 }
