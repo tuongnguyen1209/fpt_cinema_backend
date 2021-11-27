@@ -12,16 +12,16 @@ if ($movie->id_movie) {
     $movie->show();
     $movie_item = array(
         'id_movie' => $movie->id_movie,
-        'tên phim' => $movie->name_mv,
-        'ảnh phim' => $movie->image_mv,
-        'traller phim' => $movie->traller,
-        'ngày bắt đầu' => $movie->date_start,
-        'ngày kết thúc' => $movie->date_end,
-        'nội dung' => $movie->detail,
-        'diễn viên' => $movie->actor,
-        'đạo diễn' => $movie->director,
-        'thời gian' => $movie->time_mv,
-        'Thể loại' => $movie->cate,
+        'name_movie' => $movie->name_mv,
+        'img_movie' => $movie->image_mv,
+        'traller' => $movie->traller,
+        // 'date_start' => $movie->date_start,
+        // 'date_end' => $movie->date_end,
+        'detail' => $movie->detail,
+        'actor' => $movie->actor,
+        'director' => $movie->director,
+        'time_mv' => $movie->time_mv,
+        'cate' => $movie->cate,
         'day_start' => $movie->day_start,
         'day_end' => $movie->day_end,
         'time_start' => $movie->time_start,
@@ -46,8 +46,8 @@ if ($movie->id_movie) {
                 'name' => $name_mv,
                 'image' => $image_mv,
                 'traller' => $traller,
-                'datestart' => $date_start,
-                'dateend' => $date_end,
+                // 'date_start' => $date_start,
+                // 'date_end' => $date_end,
                 'content' => $detail,
                 'actor' => $actor,
                 'dirctor' => $director,
@@ -55,7 +55,11 @@ if ($movie->id_movie) {
                 "country" => $country,
                 "production" => $production,
                 "name_vn" => $name_vn,
-                'category' => $cate
+                'category' => $cate,
+                'day_start' => $movie->day_start,
+                'day_end' => $movie->day_end,
+                'time_start' => $movie->time_start,
+                'time_end' => $movie->time_end
             );
 
             array_push($movie_array['movie'], $movie_item);
