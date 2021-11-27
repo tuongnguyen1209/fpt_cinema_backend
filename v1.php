@@ -107,11 +107,10 @@ class api extends  R_api
 
     public function review()
     {
-        include_once "./model/room.php";
+        include_once "./model/review.php";
         if ($this->method == 'GET') {
             include_once './controllers/review/show.php';
         } else if ($this->method == 'POST') {
-
             include_once "./controllers/review/create.php";
         } else if ($this->method == 'PUT') {
             include_once "./controllers/review/update.php";
@@ -136,6 +135,8 @@ class api extends  R_api
             include_once './controllers/ticket/show.php';
         } else if ($this->method == 'POST') {
             include_once './controllers/ticket/create.php';
+        } else if ($this->method == 'PUT') {
+            include_once './controllers/ticket/update.php';
         } else if ($this->method == 'DELETE') {
             include_once './controllers/ticket/delete.php';
         }

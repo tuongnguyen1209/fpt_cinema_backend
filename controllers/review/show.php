@@ -3,17 +3,16 @@ $db = new db();
 $connect = $db->connect();
 
 $review = new review($connect);
-$review->id_movie = isset($_GET['id_movie']);
-if ($review->id_review) {
-    $review->id_review = $_GET['id_review'];
+$review->id_user = isset($_GET['id_user']);
+if ($review->id_user) {
+    $review->id_user = $_GET['id_user'];
     $review->show();
 
     $review_item = array(
-        'id_review' => $id_review,
-        'tên phim' => $name_mv,
-        'Họ và tên người bình luận' => $full_name,
-        'Nội dung bình luận' => $content,
-        'Số sao đánh giá' => $start
+        'Họ và tên người bình luận' => $review->full_name,
+        'tên phim' => $review->name_mv,
+        'Nội dung bình luận' => $review->content,
+        'Số sao đánh giá' => $review->start
     );
 
     print_r(json_encode($review_item));
@@ -29,8 +28,8 @@ if ($review->id_review) {
             extract($row);
 
             $review_item = array(
-                'tên phim' => $name_mv,
-                'Họ và tên người bình luận' => $full_name,
+                'full_name' => $full_name,
+                "name_mv" => $name_mv,
                 'Nội dung bình luận' => $content,
                 'Số sao đánh giá' => $start
             );

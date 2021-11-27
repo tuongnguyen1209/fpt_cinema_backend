@@ -85,7 +85,7 @@ class ticket
         $stmt->bindParam(7, $this->status);
         $stmt->bindParam(8, $this->id_combo);
         $stmt->bindParam(9, $this->ticket_information);
-        $stmt->bindParam(9, $this->ticket_code);
+        $stmt->bindParam(10, $this->ticket_code);
 
         if ($stmt->execute()) {
             return true;
@@ -94,40 +94,45 @@ class ticket
         return false;
     }
 
-    // public function update()
-    // {
-    //     $query = "UPDATE ticket set name_mv=:name_mv ,image_mv=:image_mv ,traller=:traller ,date_start=:date_start, date_end=:date_end 
-    //                 ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv 
-    //                 where id_ticket=:id_ticket";
-    //     $stmt = $this->conn->prepare($query);
+    public function update()
+    {
+        $query = "UPDATE `ticket` SET `id_session`=?,`Total_money`=?,`id_seat`=?,
+        `id_user`=?,`id_promotion`=?,`time_create`=?,`status`=?,`id_combo`=?',
+        `ticket_information`=?,`ticket_code`=? WHERE id_ticket=?";
+        $stmt = $this->conn->prepare($query);
 
-    //     //             // Clead Data 
-    //     $this->id_session = htmlspecialchars(strip_tags($this->id_session));
-    //     $this->Total_money = htmlspecialchars(strip_tags($this->Total_money));
-    //     $this->id_sesat = htmlspecialchars(strip_tags($this->id_seat));
-    //     $this->id_user = htmlspecialchars(strip_tags($this->id_user));
-    //     $this->id_promotion = htmlspecialchars(strip_tags($this->id_promotion));
-    //     $this->time_create = htmlspecialchars(strip_tags($this->time_create));
-    //     $this->status = htmlspecialchars(strip_tags($this->status));
-    //     $this->id_combo = htmlspecialchars(strip_tags($this->id_combo));
-    //     $this->ticket_information = htmlspecialchars(strip_tags($this->ticket_information));
+        // Clead Data
 
-    //     $stmt->bindParam(1, $this->id_session);
-    //     $stmt->bindParam(2, $this->Total_money);
-    //     $stmt->bindParam(3, $this->id_seat);
-    //     $stmt->bindParam(4, $this->id_user);
-    //     $stmt->bindParam(5, $this->id_promotion);
-    //     $stmt->bindParam(6, $this->time_create);
-    //     $stmt->bindParam(7, $this->status);
-    //     $stmt->bindParam(8, $this->id_combo);
-    //     $stmt->bindParam(9, $this->ticket_information);
+        $this->id_session = htmlspecialchars(strip_tags($this->id_session));
+        $this->Total_money = htmlspecialchars(strip_tags($this->Total_money));
+        $this->id_seat = htmlspecialchars(strip_tags($this->id_seat));
+        $this->id_user = htmlspecialchars(strip_tags($this->id_user));
+        $this->id_promotion = htmlspecialchars(strip_tags($this->id_promotion));
+        $this->time_create = htmlspecialchars(strip_tags($this->time_create));
+        $this->status = htmlspecialchars(strip_tags($this->status));
+        $this->id_combo = htmlspecialchars(strip_tags($this->id_combo));
+        $this->ticket_information = htmlspecialchars(strip_tags($this->ticket_information));
+        $this->ticket_code = htmlspecialchars(strip_tags($this->ticket_code));
+        $this->id_ticket = htmlspecialchars(strip_tags($this->id_ticket));
 
-    //     if ($stmt->execute()) {
-    //         return true;
-    //     }
-    //     printf("Error %s.\n", $stmt->error);
-    //     return false;
-    // }
+        $stmt->bindParam(1, $this->id_session);
+        $stmt->bindParam(2, $this->Total_money);
+        $stmt->bindParam(3, $this->id_seat);
+        $stmt->bindParam(4, $this->id_user);
+        $stmt->bindParam(5, $this->id_promotion);
+        $stmt->bindParam(6, $this->time_create);
+        $stmt->bindParam(7, $this->status);
+        $stmt->bindParam(8, $this->id_combo);
+        $stmt->bindParam(9, $this->ticket_information);
+        $stmt->bindParam(10, $this->ticket_code);
+        $stmt->bindParam(11, $this->id_ticket);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        printf("Error %s.\n", $stmt->error);
+        return false;
+    }
 
     public function delete()
     {

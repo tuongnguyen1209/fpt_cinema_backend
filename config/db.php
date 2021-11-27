@@ -10,17 +10,15 @@ class db
 
     public  function __construct()
     {
-        if (!$this->checkProduction()) {
-            // $this->username = "b5a9ccdd772ea3";
-            // $this->password = "df4e10ec";
-            // $this->host = "us-cdbr-east-04.cleardb.com";
-            // $this->database = 'heroku_1cd49e7abd7fcd4';
-        } else {
-            $this->username = "root";
-            $this->password =  "";
-            $this->host =  "localhost";
-            $this->database = 'project_cinema';
-        }
+        $this->username = "sql6454106";
+        $this->password = "38U2kJ2UA8";
+        $this->host = "sql6.freesqldatabase.com";
+        $this->database = "sql6454106";
+
+        // $this->username = "root";
+        // $this->password =  "";
+        // $this->host =  "localhost";
+        // $this->database = 'project_cinema';
     }
 
 

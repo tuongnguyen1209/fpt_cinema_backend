@@ -32,5 +32,4 @@ if ($lastID = $movie->create()) {
     $this->response(200, array('message', 'Qestion Created'));
 } else {
     $this->response(200, array('message', 'Qestion Not Created'));
-    echo json_encode(array('message', 'Qestion Not Created'));
 }

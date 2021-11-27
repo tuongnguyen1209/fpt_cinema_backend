@@ -101,8 +101,8 @@ class Movie
 
     public function create()
     {
-        $query = "INSERT INTO `movie`(`name_mv`, `image_mv`, `traller`, `date_start`, `date_end`, `detail`, `actor`, `director`, `time_mv`, `banner`, `name_vn`, `status`, `country`, `production`, `rate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        // $query = "call movie_create(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        // $query = "INSERT INTO `movie`(`name_mv`, `image_mv`, `traller`, `date_start`, `date_end`, `detail`, `actor`, `director`, `time_mv`, `banner`, `name_vn`, `status`, `country`, `production`, `rate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $query = "call movie_create(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
