@@ -13,25 +13,26 @@ if ($movie->id_movie) {
     $movie_item = array(
         'id_movie' => $movie->id_movie,
         'name_movie' => $movie->name_mv,
-        'img_movie' => $movie->image_mv,
+        'img_large' => $movie->image_lage,
+        'img_medium' => $movie->image_medium,
         'traller' => $movie->traller,
-        // 'date_start' => $movie->date_start,
-        // 'date_end' => $movie->date_end,
+        'production' => $movie->production,
+        'country' => $movie->country,
         'detail' => $movie->detail,
         'actor' => $movie->actor,
         'director' => $movie->director,
         'time_mv' => $movie->time_mv,
         'cate' => $movie->cate,
-        'day_start' => $movie->day_start,
-        'day_end' => $movie->day_end,
-        'time_start' => $movie->time_start,
-        'time_end' => $movie->time_end
+        'day' => $movie->date_start,
+        "rate" => $movie->rate,
+        // 'time_start' => $movie->time_start,
+        // 'time_end' => $movie->time_end
     );
     $this->response(200, $movie_item);
 } else {
     $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 10;
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 4;
     $read = $movie->read($page, $sort,  $limit);
     $num = $read->rowCount();
     if ($num > 0) {
@@ -44,22 +45,22 @@ if ($movie->id_movie) {
             $movie_item = array(
                 'id_movie' => $id_movie,
                 'name' => $name_mv,
-                'image' => $image_mv,
+                "name_vn" => $name_vn,
+                'image_large' => $image_lage,
                 'traller' => $traller,
-                // 'date_start' => $date_start,
-                // 'date_end' => $date_end,
+                'date_start' => $date_start,
+                'img_medium' => $image_medium,
+                'img_banner' => $image_banner,
                 'content' => $detail,
                 'actor' => $actor,
                 'dirctor' => $director,
                 'time' => $time_mv,
                 "country" => $country,
                 "production" => $production,
-                "name_vn" => $name_vn,
                 'category' => $cate,
-                'day_start' => $movie->day_start,
-                'day_end' => $movie->day_end,
-                'time_start' => $movie->time_start,
-                'time_end' => $movie->time_end
+                // 'day_end' => $movie->day_end,
+                // 'time_start' => $movie->time_start,
+                // 'time_end' => $movie->time_end
             );
 
             array_push($movie_array['movie'], $movie_item);

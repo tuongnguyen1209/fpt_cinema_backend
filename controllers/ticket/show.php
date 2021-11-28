@@ -27,25 +27,40 @@ if ($ticket->id_ticket) {
     if ($num > 0) {
         $ticket_array = [];
         $ticket_array['ticket'] = [];
-
-        while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
-
+        while ($row1 = $read->fetch(PDO::FETCH_ASSOC)) {
+            extract($row1);
+            $arr = [];
+            $listTiketSeat =  $ticket->getTiketSeat($id_ticket);
+            while ($row2 =  $listTiketSeat->fetch(PDO::FETCH_ASSOC)) {
+                extract($row2);
+                $arr2 = array(
+                    "id_seat" => $id_seat,
+                    "id_ticket" => $id_ticket,
+                );
+            }
+            print_r($arr2);
+            $listTiketCombo =  $ticket->getTiketCombo($id_ticket);
+            while ($row3 =  $listTiketCombo->fetch(PDO::FETCH_ASSOC)) {
+                extract($row3);
+                $arr3 = array(
+                    "combo" => $name,
+                    "id_ticket" => $id_ticket,
+                );
+            }
+            print_r($arr3);
             $ticket_item = array(
                 "full_name" => $full_name,
-                "id_tickets" => $id_ticket,
+                "id_ticket" => $id_ticket,
                 "name_mv" => $name_mv,
-                "date_start" => $day_start,
+                "date" => $day,
                 "time_start" => $time_start,
-                "combo" => $Combo,
-                "id_seat" => $id_seat,
                 "id_room" => $id_room,
                 "ticket_information" => $ticket_information,
                 "status" => $status,
                 "Total_money" => $Total_money,
             );
-
-            array_push($ticket_array['ticket'], $ticket_item);
+            $row = array_merge_recursive($ticket_item, $arr2, $arr3);
+            array_push($ticket_array['ticket'], $row);
         }
 
 

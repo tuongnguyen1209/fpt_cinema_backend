@@ -5,7 +5,8 @@ class Movie
 
     public $id_movie;
     public $name_mv;
-    public $image_mv;
+    public $image_lage;
+    public $image_medium;
     public $traller;
     public $date_start;
     public $date_end;
@@ -21,6 +22,7 @@ class Movie
     public $name_vn;
     public $country;
     public $production;
+    public $rate;
 
     public function __construct($db)
     {
@@ -48,7 +50,7 @@ class Movie
             $query = " call movie_show_day_DESC(?,?) ";
         } elseif ($sort == "name") {
             $query = " call movie_show_name(?,?)  ";
-        } elseif ($sort == "name_DESC") {
+        } elseif ($sort == "name_desc") {
             $query = " call movie_show_name_DESC(?,?)  ";
         }
         $stmt = $this->conn->prepare($query);
@@ -73,19 +75,20 @@ class Movie
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->name_mv = $row['name_mv'];
-        $this->image_mv = $row['image_mv'];
+        $this->name_vn = $row['name_vn'];
+        $this->image_lage = $row['image_lage'];
+        $this->image_medium = $row['image_medium'];
         $this->traller = $row['traller'];
         $this->date_start = $row['date_start'];
-        $this->date_end = $row['date_end'];
+        // $this->date_end = $row['date_end'];
         $this->detail = $row['detail'];
         $this->actor = $row['actor'];
         $this->director = $row['director'];
         $this->time_mv = $row['time_mv'];
         $this->cate = $row['cate'];
-        $this->time_start = $row['time_start'];
-        $this->time_end = $row['time_end'];
-        $this->day_start = $row['day_start'];
-        $this->day_end = $row['day_end'];
+        $this->rate = $row['rate'];
+        $this->production = $row['production'];
+        $this->country = $row['country'];
     }
 
     public function read_day_start()

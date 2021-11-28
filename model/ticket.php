@@ -27,10 +27,18 @@ class ticket
 
     public function read()
     {
-        $query = "call ticket_show()";
+        $query = "SELECT * FROM `ticket` ";
 
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+        try {
+            //code...
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        } catch (Exception $e) {
+            //throw $th;
+            print_r($e);
+        }
+
+
         return $stmt;
     }
 
@@ -149,5 +157,30 @@ class ticket
         }
         printf("Error %s.\n", $stmt->error);
         return false;
+    }
+
+    public function getTiketSeat($id)
+    {
+        $query = "SELECT id_ticket, id_seat from `ticket_seat` WHERE id_ticket = $id";
+
+        $stmt = $this->conn->prepare($query);
+        // $stmt->bindParam(1, $this->id_ticket);
+        $stmt->execute();
+
+
+
+        return $stmt;
+    }
+    public function getTiketCombo($id)
+    {
+        $query = "SELECT id_ticket, id_combo from `ticket_combo` WHERE id_ticket = $id";
+
+        $stmt = $this->conn->prepare($query);
+        // $stmt->bindParam(1, $this->id_ticket);
+        $stmt->execute();
+
+
+
+        return $stmt;
     }
 }
