@@ -14,7 +14,9 @@ $ticket->time_create = $data->time_create;
 $ticket->status = $data->status;
 $ticket->id_combo = $data->id_combo;
 $ticket->ticket_information  = $data->ticket_information;
-$ticket->ticket_code = $data->ticket_code;
+// $tk_code =
+$ticket->ticket_code = $tk_code;
+
 if ($ticket->create()) {
     $this->response(200, array('message', 'Qestion Created'));
 } else {

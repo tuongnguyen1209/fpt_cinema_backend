@@ -27,7 +27,9 @@ class ticket
 
     public function read()
     {
-        $query = "SELECT * FROM `ticket` ";
+        $query = "SELECT user.full_name, tk.id_ticket,movie.name_mv,se.day,sts.time_start,room.id_room,tk.ticket_information,tk.status,tk.Total_money FROM ticket tk INNER JOIN user on tk.id_user =user.id_user INNER JOIN promotion pr ON tk.id_promotion = pr.id_promotion INNER JOIN
+        session se ON tk.id_session = se.id_session INNER JOIN showtimes sts ON se.id_showtimes = sts.id_showtimes INNER JOIN room on se.id_room =room.id_room  INNER JOIN movie ON se.id_movie =movie.id_movie GROUP BY user.id_user ORDER BY user.id_user        
+        ";
 
         try {
             //code...
@@ -166,14 +168,11 @@ class ticket
         $stmt = $this->conn->prepare($query);
         // $stmt->bindParam(1, $this->id_ticket);
         $stmt->execute();
-
-
-
         return $stmt;
     }
     public function getTiketCombo($id)
     {
-        $query = "SELECT id_ticket, id_combo from `ticket_combo` WHERE id_ticket = $id";
+        $query = "SELECT tkcb.id_ticket, combo.name, tkcb.quantity,tkcb.unit_price from `ticket_combo` tkcb INNER JOIN combo ON tkcb.id_combo = combo.id_combo   WHERE id_ticket = $id";
 
         $stmt = $this->conn->prepare($query);
         // $stmt->bindParam(1, $this->id_ticket);

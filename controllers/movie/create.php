@@ -20,8 +20,6 @@ $movie->status = $data->status;
 $movie->country = $data->country;
 $movie->production = $data->production;
 $movie->name_vn = $data->name_vn;
-
-
 $ar = $data->id_cate;
 if ($lastID = $movie->create()) {
     $movie->id_movie = $lastID;

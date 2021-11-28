@@ -124,6 +124,8 @@ class api extends  R_api
         include_once "./model/room.php";
         if ($this->method == 'GET') {
             include_once './controllers/room/show.php';
+        } else if ($this->method == 'POST') {
+            include_once './controllers/room/create.php';
         }
     }
 
