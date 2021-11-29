@@ -109,5 +109,32 @@ class user
         printf("Error %s.\n", $stmt->error);
         return false;
     }
+
+    public function login($username, $pws)
+    {
+        $query = "SELECT id_user, full_name, email, phone, status  FROM user WHERE email=? and password=? ";
+
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $username);
+        $stmt->bindParam(2, $pws);
+        $stmt->execute();
+
+
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (isset($row['id_user'])) {
+
+            $this->id_user = $row['id_user'];
+            $this->full_name = $row['full_name'];
+            $this->email = $row['email'];
+            $this->phone = $row['phone'];
+            $this->status = $row['status'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 // 

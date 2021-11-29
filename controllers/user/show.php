@@ -1,10 +1,10 @@
 <?php
-    $db = new db();
-    $connect = $db->connect();
-    $user = new user($connect);
-    
-    $user->id_user = isset($_GET['id_user']);
-    if($user->id_user == true){
+$db = new db();
+$connect = $db->connect();
+$user = new user($connect);
+
+$user->id_user = isset($_GET['id_user']);
+if ($user->id_user == true) {
     $user->id_user = $_GET['id_user'];
     $user->show();
 
@@ -17,16 +17,16 @@
     );
 
     print_r(json_encode($user_item));
-}else{
+} else {
 
     $read = $user->read();
 
     $num = $read->rowCount();
-    if($num>0){
+    if ($num > 0) {
         $user_array = [];
-        $user_array['user']=[];
+        $user_array['user'] = [];
 
-        while($row = $read->fetch(PDO::FETCH_ASSOC)){
+        while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
 
             $user_item = array(
@@ -36,11 +36,10 @@
                 'phone' => $phone,
                 'password' => $password,
                 'trạng thái' => $status
-                            );
+            );
 
-            array_push($user_array['user'],$user_item);
+            array_push($user_array['user'], $user_item);
         }
         echo json_encode($user_array);
     }
 }
-?>

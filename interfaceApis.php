@@ -35,7 +35,7 @@ class R_api
         //nhận thêm dữ liệu tương ứng theo từng loại method
         switch ($this->method) {
             case 'POST':
-                $this->params = file_get_contents("php://input");
+                $this->params = json_decode(file_get_contents("php://input"));
                 break;
             case 'GET': //đã lấy thẳng từ url nên không cần nhận
                 break;
