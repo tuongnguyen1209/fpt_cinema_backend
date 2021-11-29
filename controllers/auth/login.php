@@ -12,7 +12,6 @@ $password =  md5($this->params->password);
 
 $user->login($username, $password);
 
-print_r($user);
 
 $response = array(
     'status' => 'success',
