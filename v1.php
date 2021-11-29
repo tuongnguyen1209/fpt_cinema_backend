@@ -173,5 +173,15 @@ class api extends  R_api
             include_once "./controllers/dasboard/delete.php";
         }
     }
+
+    public function auth()
+    {
+        include_once "./model/user.php";
+        if ($this->method == 'POST') {
+            include_once "./controllers/auth/login.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/user/update.php";
+        }
+    }
 }
 $api = new api();
