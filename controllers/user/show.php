@@ -2,7 +2,6 @@
 $db = new db();
 $connect = $db->connect();
 $user = new user($connect);
-
 $user->id_user = isset($_GET['id_user']);
 if ($user->id_user == true) {
     $user->id_user = $_GET['id_user'];
@@ -16,7 +15,11 @@ if ($user->id_user == true) {
         'trạng thái' => $user->status
     );
 
-    print_r(json_encode($user_item));
+    $response = array(
+        'status' => 'success',
+        'data' => $user_item,
+    );
+    $this->response(200, $response);
 } else {
 
     $read = $user->read();
@@ -40,6 +43,10 @@ if ($user->id_user == true) {
 
             array_push($user_array['user'], $user_item);
         }
-        echo json_encode($user_array);
+        $response = array(
+            'status' => 'success',
+            'data' => $user_array,
+        );
+        $this->response(200, $response);
     }
 }

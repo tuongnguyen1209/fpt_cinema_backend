@@ -32,9 +32,6 @@
 
                 array_push($banner_array['banner'],$banner_item);
             }
-            echo json_encode($banner_array);
+            
         }
     }
-
-    
-?>

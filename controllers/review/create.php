@@ -11,8 +11,14 @@ $review->start = $data->start;
 $review->id_user = $data->id_user;
 
 if ($review->create()) {
-    $this->response(200, array('message', 'Qestion Created'));
+    $response = array(
+        'status' => 'success',
+        'data' => $review,
+    );
+    $this->response(200, $response);
 } else {
-    $this->response(200, array('message', 'Qestion Not Created'));
-    echo json_encode(array('message', 'Qestion Not Created'));
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
 }

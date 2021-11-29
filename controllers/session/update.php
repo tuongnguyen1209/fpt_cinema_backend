@@ -12,9 +12,14 @@
     
 
     if($session->update()){
-        echo json_encode(array('message','Question Created'));
+        $response = array(
+            'status' => 'success',
+            'data' => $session,
+        );
+        $this->response(200, $response);
     }else{
-        echo json_encode(array('message','Question Not Created'));
+        $this->response(401, array(
+            'status' => 'False',
+            'message' => 'lỗi'
+        ));
     }
-
-?>

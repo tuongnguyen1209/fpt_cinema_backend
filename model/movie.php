@@ -17,7 +17,7 @@ class Movie
     public $cate;
     public $id_cate;
 
-    public $banner;
+    public $image_banner;
     public $status;
     public $name_vn;
     public $country;
@@ -91,13 +91,21 @@ class Movie
         $this->country = $row['country'];
     }
 
-    public function read_day_start()
+    public function read_day()
     {
 
-        $query = "SELECT * From movie GROUP BY date_start order by id_movie";
+        // $query = "SELECT mv.id_movie,mv.image_lage,mv.image_medium,mv.image_banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
+        // FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category
+        // WHERE mv.date_start >= ? AND mv.date_end <= ?
+        // GROUP BY mv.id_movie order by mv.date_start";
+        $query = "call movie_day(?,?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->id_movie);
+        $this->date_start = htmlspecialchars(strip_tags($this->date_start));
+        $this->date_end = htmlspecialchars(strip_tags($this->date_end));
+        $stmt->bindParam(1, $this->date_start);
+        $stmt->bindParam(2, $this->date_end);
         $stmt->execute();
+        return $stmt;
     }
 
 
@@ -105,12 +113,12 @@ class Movie
     public function create()
     {
         // $query = "INSERT INTO `movie`(`name_mv`, `image_mv`, `traller`, `date_start`, `date_end`, `detail`, `actor`, `director`, `time_mv`, `banner`, `name_vn`, `status`, `country`, `production`, `rate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $query = "call movie_create(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $query = "INSERT INTO `movie`(`name_mv`, `image_lage`, `traller`, `date_start`, `date_end`, `detail`, `actor`, `director`, `time_mv`, `image_banner`, `name_vn`, `status`, `country`, `production`, `rate`, `image_medium`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
         $this->name_mv = htmlspecialchars(strip_tags($this->name_mv));
-        $this->image_mv = htmlspecialchars(strip_tags($this->image_mv));
+        $this->image_lage = htmlspecialchars(strip_tags($this->image_lage));
         $this->traller = htmlspecialchars(strip_tags($this->traller));
         $this->date_start = htmlspecialchars(strip_tags($this->date_start));
         $this->date_end = htmlspecialchars(strip_tags($this->date_end));
@@ -119,16 +127,17 @@ class Movie
         $this->director = htmlspecialchars(strip_tags($this->director));
         $this->time_mv = htmlspecialchars(strip_tags($this->time_mv));
 
-        $this->banner = htmlspecialchars(strip_tags($this->banner));
-        $this->status = htmlspecialchars(strip_tags($this->status));
+        $this->image_banner = htmlspecialchars(strip_tags($this->image_banner));
         $this->name_vn = htmlspecialchars(strip_tags($this->name_vn));
+        $this->status = htmlspecialchars(strip_tags($this->status));
         $this->country = htmlspecialchars(strip_tags($this->country));
         $this->production = htmlspecialchars(strip_tags($this->production));
         $this->rate = htmlspecialchars(strip_tags($this->rate));
+        $this->image_medium = htmlspecialchars(strip_tags($this->image_medium));
 
 
         $stmt->bindParam(1, $this->name_mv);
-        $stmt->bindParam(2, $this->image_mv);
+        $stmt->bindParam(2, $this->image_lage);
         $stmt->bindParam(3, $this->traller);
         $stmt->bindParam(4, $this->date_start);
         $stmt->bindParam(5, $this->date_end);
@@ -137,12 +146,13 @@ class Movie
         $stmt->bindParam(8, $this->director);
         $stmt->bindParam(9, $this->time_mv);
 
-        $stmt->bindParam(10, $this->banner);
+        $stmt->bindParam(10, $this->image_banner);
         $stmt->bindParam(12, $this->status);
         $stmt->bindParam(11, $this->name_vn);
         $stmt->bindParam(13, $this->country);
         $stmt->bindParam(14, $this->production);
         $stmt->bindParam(15, $this->rate);
+        $stmt->bindParam(16, $this->image_medium);
 
         if ($stmt->execute() > 0) {
             return   $this->conn->lastInsertId();

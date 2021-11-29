@@ -13,7 +13,11 @@ if ($category->id_category) {
         'Tên thể loại' => $category->name
     );
 
-    print_r(json_encode($category_item));
+    $response = array(
+        'status' => 'success',
+        'data' => $category_item,
+    );
+    $this->response(200, $response);
 } else {
     $read = $category->read();
 
@@ -32,6 +36,10 @@ if ($category->id_category) {
 
             array_push($category_array['category'], $category_item);
         }
-        $this->response(200, $category_array);
+        $response = array(
+            'status' => 'success',
+            'data' => $category_array,
+        );
+        $this->response(200, $response);
     }
 }

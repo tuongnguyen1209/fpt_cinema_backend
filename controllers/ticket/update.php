@@ -17,7 +17,14 @@ $ticket->id_combo = $data->id_combo;
 $ticket->ticket_information  = $data->ticket_information;
 $ticket->ticket_code = $data->ticket_code;
 if ($ticket->update()) {
-    $this->response(200, array('message', 'Qestion Created'));
+    $response = array(
+        'status' => 'success',
+        'data' => $ticket,
+    );
+    $this->response(200, $response);
 } else {
-    $this->response(200, array('message', 'Qestion Not Created'));
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
 }

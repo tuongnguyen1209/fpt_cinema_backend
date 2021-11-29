@@ -8,6 +8,7 @@ class user
     public $phone;
     public $password;
     public $status;
+    public $administration;
 
     public function __construct($db)
     {
@@ -68,7 +69,7 @@ class user
 
     public function update()
     {
-        $query = "UPDATE user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status where id_user=:id_user";
+        $query = "UPDATE user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,administration=:administration  where id_user=:id_user";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -92,7 +93,18 @@ class user
         printf("Error %s.\n", $stmt->error);
         return false;
     }
-
+    public function update_status($status)
+    {
+        $query = "UPDATE user set status=:status  where id_user=:id_user";
+        $stmt = $this->conn->prepare($query);
+        $this->status = htmlspecialchars(strip_tags($this->status));
+        $stmt->bindParam(':status', $this->status);
+        if ($stmt->execute()) {
+            return true;
+        }
+        printf("Error %s.\n", $stmt->error);
+        return false;
+    }
     public function delete()
     {
         $query = "DELETE FROM user where id_user=:id_user";

@@ -34,9 +34,16 @@ if ($movie->update()) {
         $movie->id_cate = $data->id_cate = $ar[$i];
         $movie->create_CT_MV();
     }
-    $this->response(200, array('message', 'Qestion Created'));
+    $response = array(
+        'status' => 'success',
+        'data' => $movie,
+    );
+    $this->response(200, $response);
 } else {
-    $this->response(400, array('message', 'false'));
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
     // echo json_encode(array('message', 'Qestion Not Update'));
 }
 

@@ -13,7 +13,11 @@ if ($room->id_room) {
         'name_room' => $room->name
     );
 
-    print_r(json_encode($room_item));
+    $response = array(
+        'status' => 'success',
+        'data' => $room_item,
+    );
+    $this->response(200, $response);
 } else {
     $read = $room->read();
 
@@ -32,6 +36,10 @@ if ($room->id_room) {
 
             array_push($room_array['room'], $room_item);
         }
-        echo json_encode($room_array);
+        $response = array(
+            'status' => 'success',
+            'data' => $room_array,
+        );
+        $this->response(200, $response);
     }
 }

@@ -13,10 +13,16 @@ $user->status = $data->status;
 $user->phone = $data->phone;
 
 if ($user->update()) {
-    $this->response(200, array('message', 'Qestion Created'));
+    $response = array(
+        'status' => 'success',
+        'data' => $user,
+    );
+    $this->response(200, $response);
 } else {
-    $this->response(400, array('message', 'false'));
-    // echo json_encode(array('message', 'Qestion Not Update'));
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
 }
 
 

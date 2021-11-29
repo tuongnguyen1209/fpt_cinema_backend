@@ -28,12 +28,23 @@ if ($movie->id_movie) {
         // 'time_start' => $movie->time_start,
         // 'time_end' => $movie->time_end
     );
-    $this->response(200, $movie_item);
+    $response = array(
+        'status' => 'success',
+        'data' => $movie_item,
+    );
+    $this->response(200, $response);
 } else {
     $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
     $limit = isset($_GET["limit"]) ? $_GET["limit"] : 10;
-    $read = $movie->read($page, $sort,  $limit);
+    $movie->date_start = isset($_GET["date_start"]) ? $_GET["date_start"] : false;
+    $movie->date_end = isset($_GET["date_end"]) ? $_GET["date_end"] : false;
+
+    if ($movie->date_start == true || $movie->date_end == true) {
+        $read = $movie->read_day();
+    } else {
+        $read = $movie->read($page, $sort,  $limit);
+    }
     $num = $read->rowCount();
     if ($num > 0) {
         $movie_array = [];
@@ -65,6 +76,10 @@ if ($movie->id_movie) {
 
             array_push($movie_array['movie'], $movie_item);
         }
-        $this->response(200, $movie_array);
+        $response = array(
+            'status' => 'success',
+            'data' => $movie_array,
+        );
+        $this->response(200, $response);
     }
 }

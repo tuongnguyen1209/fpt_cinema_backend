@@ -16,7 +16,11 @@ if ($session->id_session) {
         'time_end' => $session->time_end,
         'type' => $session->type
     );
-    $this->response(200, $session_item);
+    $response = array(
+        'status' => 'success',
+        'data' => $session_item,
+    );
+    $this->response(200, $response);
 } else {
     $read = $session->read();
     $num = $read->rowCount();
@@ -41,6 +45,10 @@ if ($session->id_session) {
         }
 
 
-        $this->response(200, $session_array);
+        $response = array(
+            'status' => 'success',
+            'data' => $category,
+        );
+        $this->response(200, $response);
     }
 }

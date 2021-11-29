@@ -43,9 +43,10 @@
 
                 array_push($promotion_array['promotion'],$promotion_item);
             }
-            echo json_encode($promotion_array);
+            $response = array(
+                'status' => 'success',
+                'data' => $promotion_array,
+            );
+            $this->response(200, $response);
         }
     }
-
-    
-?>

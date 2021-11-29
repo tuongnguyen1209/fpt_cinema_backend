@@ -8,7 +8,14 @@ $data = json_decode(file_get_contents("php://input"));
 $room->name = $data->name;
 
 if ($room->create()) {
-    $this->response(200, array('message', 'Qestion Created'));
+    $response = array(
+        'status' => 'success',
+        'data' => $room,
+    );
+    $this->response(200, $response);
 } else {
-    $this->response(200, array('message', 'Qestion Not Created'));
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
 }

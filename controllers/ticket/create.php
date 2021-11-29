@@ -21,18 +21,30 @@ $ticket->ticket_code = $tk_code;
 
 
 $tks = $data->id_seat;
-$tkcb = $data->id_combo;
+$tkcb_id = $data->id_combo;
+$tkcb_quantity = $data->quantity;
+$tkcb_unit_price = $data->unit_price;
 if ($lastID = $ticket->create()) {
     $ticket->id_ticket = $lastID;
     for ($i = 0; $i < count($tks); $i++) {
         $ticket->id_seat = $data->id_seat = $tks[$i];
         $ticket->createTiketSeat();
     }
-    for ($i = 0; $i < count($tkcb); $i++) {
-        $ticket->id_combo = $data->id_combo = $tkcb[$i];
+    for ($i = 0; $i < count($tkcb_id); $i++) {
+        $ticket->id_combo = $data->id_combo = $tkcb_id[$i];
+        $ticket->quantity = $data->quantity = $tkcb_quantity[$i];
+        $ticket->unit_price = $data->unit_price = $tkcb_unit_price[$i];
+
         $ticket->createTiketCombo();
     }
-    $this->response(200, array('message', 'Qestion Created'));
+    $response = array(
+        'status' => 'success',
+        'data' => $ticket,
+    );
+    $this->response(200, $response);
 } else {
-    $this->response(200, array('message', 'Qestion Not Created'));
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
 }

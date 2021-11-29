@@ -15,7 +15,11 @@ if ($review->id_user) {
         'Số sao đánh giá' => $review->start
     );
 
-    print_r(json_encode($review_item));
+    $response = array(
+        'status' => 'success',
+        'data' => $review_item,
+    );
+    $this->response(200, $response);
 } else {
     $read = $review->read();
 
@@ -36,6 +40,10 @@ if ($review->id_user) {
 
             array_push($review_array['review'], $review_item);
         }
-        echo json_encode($review_array);
+        $response = array(
+            'status' => 'success',
+            'data' => $review_array,
+        );
+        $this->response(200, $response);
     }
 }

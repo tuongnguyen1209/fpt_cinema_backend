@@ -39,4 +39,8 @@ while ($row = $total_user->fetch(PDO::FETCH_ASSOC)) {
 
 
 array_push($dasboard_array['dasboard'], $mv_Sum, $mv_sum_show, $total_year_s, $total_user_s);
-$this->response(200, $dasboard_array);
+$response = array(
+    'status' => 'success',
+    'data' => $dasboard_array,
+);
+$this->response(200, $response);
