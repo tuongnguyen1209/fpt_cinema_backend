@@ -121,12 +121,19 @@ class user
         $stmt->execute();
 
 
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id_user = $row['id_user'];
-        $this->full_name = $row['full_name'];
-        $this->email = $row['email'];
-        $this->phone = $row['phone'];
-        $this->status = $row['status'];
+        if (isset($row['id_user'])) {
+
+            $this->id_user = $row['id_user'];
+            $this->full_name = $row['full_name'];
+            $this->email = $row['email'];
+            $this->phone = $row['phone'];
+            $this->status = $row['status'];
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 // 
