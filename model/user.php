@@ -43,7 +43,7 @@ class user
 
     public function create()
     {
-        $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status";
+        $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,create_at = now()";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -52,6 +52,7 @@ class user
         $this->phone = htmlspecialchars(strip_tags($this->phone));
         $this->password = htmlspecialchars(strip_tags($this->password));
         $this->status = htmlspecialchars(strip_tags($this->status));
+
 
         $stmt->bindParam(':full_name', $this->full_name);
         $stmt->bindParam(':email', $this->email);

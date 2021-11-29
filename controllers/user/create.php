@@ -10,11 +10,8 @@
     $user->phone = $data->phone;
     $user->password = $data->password;
     $user->status = $data->status;
-
     if($user->create()){
         echo json_encode(array('message','Qestion Created'));
     }else{
         echo json_encode(array('message','Qestion Not Created'));
     }
-
-?>

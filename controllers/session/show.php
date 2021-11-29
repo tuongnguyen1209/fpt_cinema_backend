@@ -17,7 +17,6 @@ if ($session->id_session) {
         'type' => $session->type
     );
     $this->response(200, $session_item);
-
 } else {
     $read = $session->read();
     $num = $read->rowCount();
@@ -40,7 +39,7 @@ if ($session->id_session) {
 
             array_push($session_array['session'], $session_item);
         }
-    
+
 
         $this->response(200, $session_array);
     }
