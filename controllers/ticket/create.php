@@ -18,23 +18,20 @@ $ticket->ticket_information  = $data->ticket_information;
 $date = time();
 $tk_code = $ticket->id_session . $ticket->id_user . $date;
 $ticket->ticket_code = $tk_code;
-$ar_ = $data->id_seat;
+
+
+$tks = $data->id_seat;
+$tkcb = $data->id_combo;
 if ($lastID = $ticket->create()) {
     $ticket->id_ticket = $lastID;
-    for ($i = 0; $i < count($ar); $i++) {
-        $ticket->id_seat = $data->id_seat = $ar[$i];
+    for ($i = 0; $i < count($tks); $i++) {
+        $ticket->id_seat = $data->id_seat = $tks[$i];
         $ticket->createTiketSeat();
     }
-}
-$ars = $data->id_combo;
-if ($lastID = $ticket->create()) {
-    $ticket->id_ticket = $lastID;
-    for ($i = 0; $i < count($ar); $i++) {
-        $ticket->id_combo = $data->id_combo = $ar[$i];
+    for ($i = 0; $i < count($tkcb); $i++) {
+        $ticket->id_combo = $data->id_combo = $tkcb[$i];
         $ticket->createTiketCombo();
     }
-}
-if ($ticket->create()) {
     $this->response(200, array('message', 'Qestion Created'));
 } else {
     $this->response(200, array('message', 'Qestion Not Created'));

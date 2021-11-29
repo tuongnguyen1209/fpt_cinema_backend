@@ -92,7 +92,7 @@ class ticket
         $stmt->bindParam(7, $this->ticket_code);
 
         if ($stmt->execute()) {
-            return true;
+            return   $this->conn->lastInsertId();
         }
         printf("Error %s.\n", $stmt->error);
         return false;
@@ -166,14 +166,14 @@ class ticket
     }
     public function createTiketSeat()
     {
-        $query = 'INSERT INTO ticket_seat SET id_ticket=:id_ticket, id_seat=:id_seat';
+        $query = 'INSERT INTO `ticket_seat`(`id_ticket`, `id_seat`) VALUES (?,?)';
         $stmt = $this->conn->prepare($query);
 
-        $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
-        $this->id_cate = htmlspecialchars(strip_tags($this->id_cate));
+        $this->id_ticket = htmlspecialchars(strip_tags($this->id_ticket));
+        $this->id_seat = htmlspecialchars(strip_tags($this->id_seat));
 
-        $stmt->bindParam(':id_movie', $this->id_movie);
-        $stmt->bindParam(':id_category', $this->id_cate);
+        $stmt->bindParam(1, $this->id_ticket);
+        $stmt->bindParam(2, $this->id_seat);
 
         if ($stmt->execute()) {
             return true;
@@ -196,15 +196,15 @@ class ticket
 
     public function createTiketCombo()
     {
-        $query = "INSERT INTO `ticket_combo` set id_ticket=:id_ticket  id_combo=:id_combo";
+        $query = "INSERT INTO `ticket_combo`(`id_ticket`, `id_combo`) VALUES (?,?)";
 
         $stmt = $this->conn->prepare($query);
 
-        $this->id_movie = htmlspecialchars(strip_tags($this->id_movie));
-        $this->id_cate = htmlspecialchars(strip_tags($this->id_cate));
+        $this->id_ticket = htmlspecialchars(strip_tags($this->id_ticket));
+        $this->id_combo = htmlspecialchars(strip_tags($this->id_combo));
 
-        $stmt->bindParam(':id_movie', $this->id_movie);
-        $stmt->bindParam(':id_category', $this->id_cate);
+        $stmt->bindParam(1, $this->id_ticket);
+        $stmt->bindParam(2, $this->id_combo);
 
         if ($stmt->execute()) {
             return true;
