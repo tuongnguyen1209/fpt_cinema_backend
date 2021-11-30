@@ -35,6 +35,7 @@ if ($session->id_session) {
         extract($row);
 
         $session_item = array(
+            'id_session' => $id_session,
             'name_mv' => $name_mv,
             'image_lage' => $image_lage,
             'room_number' => $name,
