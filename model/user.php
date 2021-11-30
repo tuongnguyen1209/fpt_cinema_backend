@@ -124,7 +124,7 @@ class user
 
     public function login($username, $pws)
     {
-        $query = "SELECT id_user, full_name, email, phone, status  FROM user WHERE email=? and password=? ";
+        $query = "SELECT id_user, full_name, email, phone, status,administration  FROM user WHERE email=? and password=? ";
 
 
         $stmt = $this->conn->prepare($query);
@@ -143,6 +143,7 @@ class user
             $this->email = $row['email'];
             $this->phone = $row['phone'];
             $this->status = $row['status'];
+            $this->administration = $row['administration'];
             return true;
         } else {
             return false;
