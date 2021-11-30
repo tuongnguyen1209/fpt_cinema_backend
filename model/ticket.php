@@ -111,7 +111,6 @@ class ticket
         $stmt->bindParam(5, $this->status);
         $stmt->bindParam(6, $this->ticket_information);
         $stmt->bindParam(7, $this->ticket_code);
-
         if ($stmt->execute()) {
             return   $this->conn->lastInsertId();
         }
