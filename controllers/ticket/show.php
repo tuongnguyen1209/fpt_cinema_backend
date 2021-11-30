@@ -25,7 +25,6 @@ if ($ticket->code) {
                 $seat
             );
         }
-
         $listTiketCombo =  $ticket->getTiketCombo($id_ticket);
         $arr3 = [];
         while ($row3 =  $listTiketCombo->fetch(PDO::FETCH_ASSOC)) {
