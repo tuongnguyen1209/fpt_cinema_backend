@@ -20,7 +20,7 @@ class session
     public function read()
     {
         $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
-            FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes ";
+            FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes order by  se.day desc";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
