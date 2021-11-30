@@ -13,6 +13,7 @@ if ($movie->id_movie) {
     $movie_item = array(
         'id_movie' => $movie->id_movie,
         'name_movie' => $movie->name_mv,
+        "name_vn" => $movie->name_vn,
         'img_large' => $movie->image_lage,
         'img_medium' => $movie->image_medium,
         'traller' => $movie->traller,

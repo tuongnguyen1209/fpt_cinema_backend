@@ -89,6 +89,7 @@ class Movie
         $this->rate = $row['rate'];
         $this->production = $row['production'];
         $this->country = $row['country'];
+        $this->name_vn = $row['name_vn'];
     }
 
     public function read_day()
