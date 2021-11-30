@@ -183,5 +183,14 @@ class api extends  R_api
             include_once "./controllers/user/update.php";
         }
     }
+    public function tk_seat()
+    {
+        include_once "./model/tk_seat.php";
+        if ($this->method == 'GET') {
+            include_once "./controllers/tk_seat/show.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/user/update.php";
+        }
+    }
 }
 $api = new api();
