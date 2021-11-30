@@ -27,7 +27,6 @@ $movie->name_vn = $data->name_vn;
 
 // $movie->update();
 $ar = $data->id_cate;
-print_r($ar);
 if ($movie->update()) {
     $movie->delete_CT_MV();
     for ($i = 0; $i < count($ar); $i++) {
