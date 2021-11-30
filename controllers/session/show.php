@@ -4,6 +4,8 @@ $connect = $db->connect();
 
 $session = new session($connect);
 $session->id_session = isset($_GET['id_session']);
+$session->day = isset($_GET['day']);
+$session->id_showtimes = isset($_GET['id_showtimes']);
 if ($session->id_session) {
     $session->id_session = ($_GET['id_session']);
     $session->show();
@@ -20,6 +22,35 @@ if ($session->id_session) {
     $response = array(
         'status' => 'success',
         'data' => $session_item,
+    );
+    $this->response(200, $response);
+} elseif ($session->day == true || $session->id_showtimes == true) {
+    $session->day = ($_GET['day']);
+    $session->id_showtimes = ($_GET['id_showtimes']);
+    $showtime = $session->show_time();
+    $session_array = [];
+    $session_array['session'] = [];
+
+    while ($row = $showtime->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+
+        $session_item = array(
+            'name_mv' => $name_mv,
+            'image_lage' => $image_lage,
+            'room_number' => $name,
+            'day' => $day,
+            'time_start' => $time_start,
+            'time_end' => $time_end,
+            'type' => $type
+        );
+
+        array_push($session_array['session'], $session_item);
+    }
+
+
+    $response = array(
+        'status' => 'success',
+        'data' => $session_array,
     );
     $this->response(200, $response);
 } else {

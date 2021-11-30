@@ -118,5 +118,19 @@ class session
         printf("Error %s.\n", $stmt->error);
         return false;
     }
+    // \
+
+    public function show_time()
+    {
+        $query = "SELECT  se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
+            FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes
+            where se.day=?
+            and se.id_showtimes =?";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->day);
+        $stmt->bindParam(2, $this->id_showtimes);
+        $stmt->execute();
+        return $stmt;
+    }
 }
-// 
