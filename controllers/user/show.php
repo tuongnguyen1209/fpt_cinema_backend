@@ -30,7 +30,7 @@ if ($user->id_user == true) {
         $user_array['user'] = [];
 
         while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
+             extract($row);
 
             $user_item = array(
                 'id_user' => $id_user,
@@ -38,7 +38,8 @@ if ($user->id_user == true) {
                 'email' => $email,
                 'phone' => $phone,
                 'password' => $password,
-                'status' => $status
+                'status' => $status,
+                'administration' => $administration
             );
 
             array_push($user_array['user'], $user_item);

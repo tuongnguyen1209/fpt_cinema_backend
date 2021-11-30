@@ -39,6 +39,7 @@ class user
         $this->phone = $row['phone'];
         $this->password = $row['password'];
         $this->status = $row['status'];
+        $this->administration = $row['administration'];
     }
 
 
