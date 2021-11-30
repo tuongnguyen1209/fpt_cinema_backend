@@ -20,7 +20,7 @@ class session
     public function read()
     {
         $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
-            FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes GROUP BY se.id_session";
+            FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes ";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -63,8 +63,8 @@ class session
         $this->id_showtimes = htmlspecialchars(strip_tags($this->id_showtimes));
 
 
-        $stmt->bindParam(1, $this->id_room);
-        $stmt->bindParam(2, $this->id_movie);
+        $stmt->bindParam(1, $this->id_movie);
+        $stmt->bindParam(2, $this->id_room);
         $stmt->bindParam(3, $this->day);
         $stmt->bindParam(4, $this->type);
         $stmt->bindParam(5, $this->id_showtimes);
