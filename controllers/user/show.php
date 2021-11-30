@@ -39,6 +39,7 @@ if ($user->id_user == true) {
                 'phone' => $phone,
                 'password' => $password,
                 'status' => $status
+                'administration' => $administration
             );
 
             array_push($user_array['user'], $user_item);
