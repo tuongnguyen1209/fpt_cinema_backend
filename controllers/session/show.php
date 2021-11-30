@@ -47,7 +47,7 @@ if ($session->id_session) {
 
         $response = array(
             'status' => 'success',
-            'data' => $category,
+            'data' => $session_array,
         );
         $this->response(200, $response);
     }
