@@ -163,15 +163,15 @@ class Movie
     }
     public function update()
     {
-        $query = "UPDATE  movie set name_mv=:name_mv, image_mv=:image_mv, traller=:traller, date_start=:date_start, date_end=:date_end 
-        ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production,rate=:rate
-            where id_movie=:id_movie";
+        $query = "UPDATE  movie set name_mv=:name_mv, image_lage=:image_lage, traller=:traller, date_start=:date_start, date_end=:date_end 
+        ,detail=:detail ,actor=:actor ,director=:director ,time_mv=:time_mv, image_banner=:banner, status=:status,name_vn=:name_vn, country=:country, production=:production,rate=:rate
+      ,  image_medium=:image_medium    where id_movie=:id_movie";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
         // Clead Data 
         $this->name_mv = htmlspecialchars(strip_tags($this->name_mv));
-        $this->image_mv = htmlspecialchars(strip_tags($this->image_mv));
+        $this->image_lage = htmlspecialchars(strip_tags($this->image_lage));
         $this->traller = htmlspecialchars(strip_tags($this->traller));
         $this->date_start = htmlspecialchars(strip_tags($this->date_start));
         $this->date_end = htmlspecialchars(strip_tags($this->date_end));
@@ -186,10 +186,11 @@ class Movie
         $this->country = htmlspecialchars(strip_tags($this->country));
         $this->production = htmlspecialchars(strip_tags($this->production));
         $this->rate = htmlspecialchars(strip_tags($this->rate));
-
+        $this->image_medium = htmlspecialchars(strip_tags($this->image_medium));
 
         $stmt->bindParam(':name_mv', $this->name_mv);
-        $stmt->bindParam(':image_mv', $this->image_mv);
+        $stmt->bindParam(':image_lage', $this->image_lage);
+        $stmt->bindParam(':image_medium', $this->image_medium);
         $stmt->bindParam(':traller', $this->traller);
         $stmt->bindParam(':date_start', $this->date_start);
         $stmt->bindParam(':date_end', $this->date_end);
