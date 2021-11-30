@@ -109,6 +109,7 @@ if ($ticket->code) {
             "full_name" => $full_name,
             "id_ticket" => $id_ticket,
             "name_mv" => $name_mv,
+            "image" => $image_medium,
             "date" => $day,
             "time_start" => $time_start,
             "id_room" => $id_room,
