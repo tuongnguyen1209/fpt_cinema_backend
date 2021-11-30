@@ -9,10 +9,10 @@ if ($user->id_user == true) {
 
     $user_item = array(
         'id_user' => $user->id_user,
-        'tên:' => $user->full_name,
+        'name_user:' => $user->full_name,
         'email' => $user->email,
         'SĐT' => $user->phone,
-        'trạng thái' => $user->status
+        'status' => $user->status
     );
 
     $response = array(
@@ -34,11 +34,11 @@ if ($user->id_user == true) {
 
             $user_item = array(
                 'id_user' => $id_user,
-                'tên tài khoản' => $full_name,
+                'name_user' => $full_name,
                 'email' => $email,
                 'phone' => $phone,
                 'password' => $password,
-                'trạng thái' => $status
+                'status' => $status
             );
 
             array_push($user_array['user'], $user_item);
