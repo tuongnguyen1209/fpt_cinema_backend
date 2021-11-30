@@ -10,6 +10,7 @@ if ($session->id_session) {
     $session_item = array(
         'id_session' => $session->id_session,
         'name_mv' => $session->name_mv,
+        'image_lage' => $session->image_lage,
         'room_number' => $session->name,
         'day' => $session->day,
         'time_start' => $session->time_start,
@@ -34,6 +35,7 @@ if ($session->id_session) {
             $session_item = array(
                 'id_session' => $id_session,
                 'name_mv' => $name_mv,
+                'image_lage' => $image_lage,
                 'room_number' => $name,
                 'day' => $day,
                 'date_start' => $time_start,

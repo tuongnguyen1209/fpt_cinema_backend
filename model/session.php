@@ -19,7 +19,7 @@ class session
 
     public function read()
     {
-        $query = "SELECT se.id_session, se.day, mv.name_mv , rm.name ,se.type , st.time_start, st.time_end
+        $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
             FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes GROUP BY se.id_session";
 
         $stmt = $this->conn->prepare($query);
@@ -29,7 +29,7 @@ class session
 
     public function show()
     {
-        $query = "SELECT se.id_session, se.day, mv.name_mv , rm.name ,se.type , st.time_start, st.time_end
+        $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
             FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes
             where se.id_session =? GROUP BY se.id_session";
 
@@ -40,6 +40,7 @@ class session
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->name_mv = $row['name_mv'];
+        $this->image_lage = $row['image_lage'];
         $this->name = $row['name'];
         $this->day = $row['day'];
         $this->time_start = $row['time_start'];
