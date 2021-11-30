@@ -42,10 +42,14 @@ if ($ticket->code) {
         }
         $ticket_item = array(
             "full_name" => $full_name,
+            "email" => $email,
+            "phone" => $phone,
             "id_ticket" => $id_ticket,
             "name_mv" => $name_mv,
+            "image" => $image_medium,
             "date" => $day,
             "time_start" => $time_start,
+            "time_create" => $time_create,
             "id_room" => $id_room,
             "ticket_information" => $ticket_information,
             "status" => $status,
