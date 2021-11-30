@@ -25,7 +25,7 @@ if ($movie->id_movie) {
         'cate' => $movie->cate,
         'day' => $movie->date_start,
         "rate" => $movie->rate,
-        // 'time_start' => $movie->time_start,
+        'image_banner' => $movie->image_banner,
         // 'time_end' => $movie->time_end
     );
     $response = array(

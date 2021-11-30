@@ -80,7 +80,7 @@ class Movie
         $this->image_medium = $row['image_medium'];
         $this->traller = $row['traller'];
         $this->date_start = $row['date_start'];
-        // $this->date_end = $row['date_end'];
+        $this->image_banner = $row['image_banner'];
         $this->detail = $row['detail'];
         $this->actor = $row['actor'];
         $this->director = $row['director'];
