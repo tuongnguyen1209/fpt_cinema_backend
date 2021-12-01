@@ -11,11 +11,14 @@ class tk_seat
         $this->conn = $db;
     }
 
-    public function read()
+    public function read($id_session=1)
     {
-        $query = "SELECT id_seat FROM `ticket_seat` ";
+        $query = "SELECT id_seat FROM ticket, ticket_seat tks WHERE ticket.id_session = ? AND tks.id_ticket=ticket.id_ticket";
 
         $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $id_session);
+
         $stmt->execute();
         return $stmt;
     }
