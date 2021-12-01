@@ -145,4 +145,15 @@ class session
         $stmt->execute();
         return $stmt;
     }
+
+
+    public function getRoomExitByDay($date){
+
+        $query = "SELECT   id_room, id_showtimes FROM  session WHERE session.day=? ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $date);
+        $stmt->execute();
+        return $stmt;
+    }
 }

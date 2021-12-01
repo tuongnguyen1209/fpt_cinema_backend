@@ -192,5 +192,13 @@ class api extends  R_api
             include_once "./controllers/user/update.php";
         }
     }
+
+    public function checkshowtime()
+    {
+        include_once "./model/session.php";
+        if ($this->method == 'GET') {
+            include_once './controllers/checkShowTime/check.php';
+        }
+    }
 }
 $api = new api();
