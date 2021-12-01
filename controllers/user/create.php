@@ -10,6 +10,7 @@ $user->email = $data->email;
 $user->phone = $data->phone;
 $user->password = md5($data->password);
 $user->status = $data->status;
+$user->img_user = $data->img_user;
 
 if ($user->create()) {
     $response = array(

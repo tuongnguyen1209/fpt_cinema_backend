@@ -12,7 +12,8 @@ if ($user->id_user == true) {
         'name_user:' => $user->full_name,
         'email' => $user->email,
         'SĐT' => $user->phone,
-        'status' => $user->status
+        'status' => $user->status,
+        'image' => $user->img_user
     );
 
     $response = array(
@@ -39,7 +40,8 @@ if ($user->id_user == true) {
                 'phone' => $phone,
                 'password' => $password,
                 'status' => $status,
-                'administration' => $administration
+                'administration' => $administration,
+                'img_user' => $img_user
             );
 
             array_push($user_array['user'], $user_item);

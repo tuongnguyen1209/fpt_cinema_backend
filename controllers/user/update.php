@@ -11,6 +11,8 @@ $user->password = $data->password;
 $user->email = $data->email;
 $user->status = $data->status;
 $user->phone = $data->phone;
+$user->img_user = $data->img_user;
+
 
 if ($user->update()) {
     $response = array(

@@ -9,6 +9,8 @@ class user
     public $password;
     public $status;
     public $administration;
+    public $img_user;
+
 
     public function __construct($db)
     {
@@ -40,12 +42,13 @@ class user
         $this->password = $row['password'];
         $this->status = $row['status'];
         $this->administration = $row['administration'];
+        $this->img_user = $row['img_user'];
     }
 
 
     public function create()
     {
-        $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,create_at = now()";
+        $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,img_user=:img_user,create_at = now()";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -54,6 +57,7 @@ class user
         $this->phone = htmlspecialchars(strip_tags($this->phone));
         $this->password = htmlspecialchars(strip_tags($this->password));
         $this->status = htmlspecialchars(strip_tags($this->status));
+        $this->img_user = htmlspecialchars(strip_tags($this->img_user));
 
 
         $stmt->bindParam(':full_name', $this->full_name);
@@ -61,6 +65,7 @@ class user
         $stmt->bindParam(':phone', $this->phone);
         $stmt->bindParam(':password', $this->password);
         $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':img_user', $this->img_user);
         if ($stmt->execute()) {
             return true;
         }
@@ -70,7 +75,7 @@ class user
 
     public function update()
     {
-        $query = "UPDATE user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,administration=:administration  where id_user=:id_user";
+        $query = "UPDATE user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,administration=:administration,img_user=:img_user  where id_user=:id_user";
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -80,6 +85,7 @@ class user
         $this->password = htmlspecialchars(strip_tags($this->password));
         $this->status = htmlspecialchars(strip_tags($this->status));
         $this->id_user = htmlspecialchars((strip_tags($this->id_user)));
+        $this->img_user = htmlspecialchars((strip_tags($this->img_user)));
 
         $stmt->bindParam(':full_name', $this->full_name);
         $stmt->bindParam(':email', $this->email);
@@ -87,6 +93,7 @@ class user
         $stmt->bindParam(':password', $this->password);
         $stmt->bindParam(':status', $this->status);
         $stmt->bindParam(':id_user', $this->id_user);
+        $stmt->bindParam(':img_user', $this->img_user);
 
         if ($stmt->execute()) {
             return true;
