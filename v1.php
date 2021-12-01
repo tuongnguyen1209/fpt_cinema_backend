@@ -193,6 +193,21 @@ class api extends  R_api
         }
     }
 
+
+    public function showtimes()
+    {
+        include_once "./model/showtimes.php";
+        if ($this->method == 'GET') {
+            include_once './controllers/showtimes/show.php';
+        } else if ($this->method == 'POST') {
+
+            include_once "./controllers/showtimes/create.php";
+        } else if ($this->method == 'PUT') {
+            include_once "./controllers/showtimes/update.php";
+        } else if ($this->method == 'DELETE') {
+            include_once "./controllers/showtimes/delete.php";
+        }
+    }
     public function checkshowtime()
     {
         include_once "./model/session.php";
