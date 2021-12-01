@@ -18,7 +18,7 @@ $read = $session->getRoomExitByDay($day);
 
 $num = $read->rowCount();
 $session_array = [];
-$session_array['session'] = [];
+$session_array['list'] = [];
 if ($num > 0) {
     $arr = [];
     while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
@@ -53,7 +53,7 @@ if ($num > 0) {
             array_push($arr, $session_item);
         }
     }
-    $session_array['session'] =  $arr;
+    $session_array['list'] =  $arr;
 }
 
 
