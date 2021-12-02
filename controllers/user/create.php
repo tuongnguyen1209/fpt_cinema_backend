@@ -10,17 +10,29 @@ $user->email = $data->email;
 $user->phone = $data->phone;
 $user->password = md5($data->password);
 $user->status = $data->status;
-$user->img_user = $data->img_user;
+$connect = "tên của bạn: $user->full_name, email :$user->email, số điện thoại của bạn: $user->phone";
+// $user->img_user = $data->img_user;
+// $connect = array(
+//     "email:" => $user->full_name,
+//     "phone" => $user->email,
+// );
+// array_push($connect);
 
-if ($user->create()) {
-    $response = array(
-        'status' => 'success',
-        'data' => $user,
-    );
-    $this->response(200, $response);
-} else {
-    $this->response(401, array(
-        'status' => 'False',
-        'message' => 'lỗi'
-    ));
-}
+// $connect = implode($connect);
+goimail($user->email, $connect);
+// print_r($connect);
+
+// if ($user->create()) {
+//     $response = array(
+//         'status' => 'success',
+//         'data' => $user,
+//     );
+
+
+//     $this->response(200, $response);
+// } else {
+//     $this->response(401, array(
+//         'status' => 'False',
+//         'message' => 'lỗi'
+//     ));
+// }

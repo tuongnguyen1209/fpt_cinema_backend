@@ -26,6 +26,7 @@ class api extends  R_api
     public function user()
     {
         include_once "./model/user.php";
+        include_once "./model/mai.php";
         if ($this->method == 'GET') {
             include_once './controllers/user/show.php';
         } else if ($this->method == 'POST') {
@@ -213,6 +214,13 @@ class api extends  R_api
         include_once "./model/session.php";
         if ($this->method == 'GET') {
             include_once './controllers/checkShowTime/check.php';
+        }
+    }
+    public function goimail()
+    {
+        include_once "./model/mai.php";
+        if ($this->method == 'POST') {
+            include_once "./controllers/mail/connect.php";
         }
     }
 }
