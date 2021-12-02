@@ -193,6 +193,15 @@ class api extends  R_api
             include_once "./controllers/user/update.php";
         }
     }
+    /// fogot pass
+    public function forgotPass()
+    {
+        include_once "./model/mai.php";
+        include_once "./model/user.php";
+        if ($this->method == 'POST') {
+            include_once "./controllers/auth/forgotpass.php";
+        }
+    }
 
 
     public function showtimes()

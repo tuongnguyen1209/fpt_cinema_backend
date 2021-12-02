@@ -4,10 +4,6 @@ $connect = $db->connect();
 
 $user = new user($connect);
 
-
-
-
-
 $type = isset($_GET['type']) ? $_GET['type'] : null;
 if (isset($type)) {
     if ($type === 'fb') {

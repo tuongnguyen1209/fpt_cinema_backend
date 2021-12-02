@@ -220,5 +220,34 @@ class user
             return false;
         }
     }
+
+    function generatePassword($length = 8)
+    {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $count = mb_strlen($chars);
+
+        for ($i = 0, $result = ''; $i < $length; $i++) {
+            $index = Rand(0, $count - 1);
+            $result .= mb_substr($chars, $index, 1);
+        }
+
+        return $result;
+    }
+
+    public function forgotPass()
+    {
+        $query = "UPDATE `user` SET `password`=:pass WHERE email=:email";
+
+        $stmt = $this->conn->prepare($query);
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $stmt->bindParam(":pass", $this->password);
+        $stmt->bindParam(":email", $this->email);
+        if ($stmt->execute()) {
+
+            return true;
+        }
+        printf("Error %s.\n", $stmt->error);
+        return false;
+    }
 }
-// 
