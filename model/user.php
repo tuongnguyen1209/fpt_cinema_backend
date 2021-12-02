@@ -163,5 +163,31 @@ class user
             return false;
         }
     }
+
+    public function checkFacebook($id)
+    {
+    }
+    public function checkGoogle($id_google)
+    {
+        $query = "SELECT id_user, full_name, email, phone,status,administration  from user WHERE google_id=? ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id_google);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (isset($row['id_user'])) {
+
+            $this->id_user = $row['id_user'];
+            $this->full_name = $row['full_name'];
+            $this->email = $row['email'];
+            $this->phone = $row['phone'];
+            $this->status = $row['status'];
+            $this->administration = $row['administration'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 // 
