@@ -52,9 +52,17 @@ class user
     }
 
 
-    public function create()
+    public function create($idGoogle = null, $idFacebook = null)
     {
         $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,img_user=:img_user,create_at = now()";
+
+        if (isset($idGoogle)) {
+            $query .= "  ,google_id =$idGoogle";
+        }
+        if (isset($idFacebook)) {
+            $query .= "  ,facebook_id =$idFacebook";
+        }
+
         $stmt = $this->conn->prepare($query);
 
         // Clead Data 
@@ -176,6 +184,7 @@ class user
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        print_r($row);
         if (isset($row['id_user'])) {
 
             $this->id_user = $row['id_user'];

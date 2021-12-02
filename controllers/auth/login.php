@@ -20,13 +20,13 @@ if ($type === 'fb') {
         );
     } else {
         $data = json_decode(file_get_contents("php://input"));
-        $user->full_name = $data->name;
-        $user->email = $data->email;
-        $user->phone = $data->phone;
+        $user->full_name = isset($data->name) ? $data->name : '';
+        $user->email = isset($data->email) ? $data->email : '';
+        $user->phone = isset($data->phone) ? $data->phone : '';
         $user->password = md5($googleId);
-        $user->status = $data->status;
-        $user->img_user = $data->imageUrl;
-        if ($user->create()) {
+        $user->status = 0;
+        $user->img_user = isset($data->imageUrl) ? $data->imageUrl : '';
+        if ($user->create($googleId)) {
             $response = array(
                 'status' => 'success',
                 'data' => $user,
