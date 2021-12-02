@@ -110,6 +110,7 @@ class user
         $stmt->bindParam(':img_user', $this->img_user);
 
         if ($stmt->execute()) {
+            $this->id_user = $stmt->lastInsertId();
             return true;
         }
         printf("Error %s.\n", $stmt->error);
