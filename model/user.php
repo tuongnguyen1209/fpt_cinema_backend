@@ -204,7 +204,6 @@ class user
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        print_r($row);
         if (isset($row['id_user'])) {
 
             $this->id_user = $row['id_user'];

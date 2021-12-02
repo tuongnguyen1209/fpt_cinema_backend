@@ -17,6 +17,7 @@ if ($type === 'fb') {
             'status' => 'success',
             'data' => $user,
         );
+        $this->response(200, $response);
     } else {
         $data = json_decode(file_get_contents("php://input"));
         $user->full_name = isset($data->name) ? $data->name : '';
@@ -41,10 +42,12 @@ if ($type === 'fb') {
 } elseif ($type === 'gg') {
     $googleId = $this->params->googleId;
     if ($user->checkGoogle($googleId)) {
+
         $response = array(
             'status' => 'success',
             'data' => $user,
         );
+        $this->response(200, $response);
     } else {
         $data = json_decode(file_get_contents("php://input"));
         $user->full_name = isset($data->name) ? $data->name : '';
