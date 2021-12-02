@@ -32,7 +32,7 @@ class user
     {
         $query = "SELECT user.id_user,user.full_name,user.email,user.phone,user.password,user.status,user.create_at,user.administration,user.img_user,
         (COUNT(ticket.id_ticket)*10) as point , SUM(ticket.Total_money) as sum_all
-        FROM `user`INNER JOIN ticket ON ticket.id_user=user.id_user WHERE user.id_user=1";
+        FROM `user`INNER JOIN ticket ON ticket.id_user=user.id_user WHERE user.id_user=?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_user);
