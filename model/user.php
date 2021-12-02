@@ -81,6 +81,8 @@ class user
         $stmt->bindParam(':status', $this->status);
         $stmt->bindParam(':img_user', $this->img_user);
         if ($stmt->execute()) {
+
+            $this->id_user = $this->conn->lastInsertId();
             return true;
         }
         printf("Error %s.\n", $stmt->error);
@@ -110,7 +112,7 @@ class user
         $stmt->bindParam(':img_user', $this->img_user);
 
         if ($stmt->execute()) {
-            $this->id_user = $this->conn->lastInsertId();
+
             return true;
         }
         printf("Error %s.\n", $stmt->error);
