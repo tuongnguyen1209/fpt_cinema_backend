@@ -13,7 +13,9 @@ if ($user->id_user == true) {
         'email' => $user->email,
         'SĐT' => $user->phone,
         'status' => $user->status,
-        'image' => $user->img_user
+        'image' => $user->img_user,
+        "point" => $user->point,
+        "summ_all" => $user->sum_all
     );
 
     $response = array(
@@ -31,7 +33,7 @@ if ($user->id_user == true) {
         $user_array['user'] = [];
 
         while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
-             extract($row);
+            extract($row);
 
             $user_item = array(
                 'id_user' => $id_user,

@@ -10,6 +10,8 @@ class user
     public $status;
     public $administration;
     public $img_user;
+    public $point;
+    public $sum_all;
 
 
     public function __construct($db)
@@ -28,7 +30,9 @@ class user
 
     public function show()
     {
-        $query = "SELECT * FROM user where id_user=? LIMIT 1";
+        $query = "SELECT user.id_user,user.full_name,user.email,user.phone,user.password,user.status,user.create_at,user.administration,user.img_user,
+        (COUNT(ticket.id_ticket)*10) as point , SUM(ticket.Total_money) as sum_all
+        FROM `user`INNER JOIN ticket ON ticket.id_user=user.id_user WHERE user.id_user=1";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_user);
@@ -43,6 +47,8 @@ class user
         $this->status = $row['status'];
         $this->administration = $row['administration'];
         $this->img_user = $row['img_user'];
+        $this->point = $row['point'];
+        $this->sum_all = $row["sum_all"];
     }
 
 
