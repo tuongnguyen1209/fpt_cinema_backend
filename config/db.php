@@ -18,7 +18,7 @@ class db
         $this->username = "root";
         $this->password =  "";
         $this->host =  "localhost";
-        $this->database = 'project_cinema';
+        $this->database = 'project_cinema3';
     }
 
 
