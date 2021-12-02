@@ -9,9 +9,9 @@ if ($user->id_user == true) {
 
     $user_item = array(
         'id_user' => $user->id_user,
-        'name_user:' => $user->full_name,
+        'name_user' => $user->full_name,
         'email' => $user->email,
-        'SĐT' => $user->phone,
+        'ST' => $user->phone,
         'status' => $user->status,
         'image' => $user->img_user,
         "point" => $user->point,
