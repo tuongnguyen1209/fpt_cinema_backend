@@ -25,6 +25,7 @@ if ($type === 'fb') {
         $user->phone = isset($data->phone) ? $data->phone : '';
         $user->password = md5($facebookId);
         $user->status = 0;
+        $user->administration = 0;
         $user->img_user = isset($data->picture) ? $data->picture->data->url : '';
         if ($user->create(null, $facebookId)) {
             $response = array(
@@ -55,6 +56,7 @@ if ($type === 'fb') {
         $user->phone = isset($data->phone) ? $data->phone : '';
         $user->password = md5($googleId);
         $user->status = 0;
+        $user->administration = 0;
         $user->img_user = isset($data->imageUrl) ? $data->imageUrl : '';
         if ($user->create($googleId)) {
             $response = array(
