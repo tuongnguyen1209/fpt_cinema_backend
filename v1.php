@@ -137,6 +137,8 @@ class api extends  R_api
         if ($this->method == 'GET') {
             include_once './controllers/ticket/show.php';
         } else if ($this->method == 'POST') {
+
+            include_once "./controllers/payment/index.php";
             include_once './controllers/ticket/create.php';
         } else if ($this->method == 'PUT') {
             include_once './controllers/ticket/update.php';
@@ -230,6 +232,13 @@ class api extends  R_api
         include_once "./model/mai.php";
         if ($this->method == 'POST') {
             include_once "./controllers/mail/connect.php";
+        }
+    }
+
+    public function payment()
+    {
+        if ($this->method == 'POST') {
+            include_once "./controllers/payment/index.php";
         }
     }
 }

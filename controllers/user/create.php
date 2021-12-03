@@ -21,6 +21,15 @@ $user->img_user = $data->img_user;
 // $connect = implode($connect);
 // goimail($user->email, $connect);
 // print_r($connect);
+if (
+    $user->checkEmailExit($data->email)
+) {
+    return   $this->response(200, array(
+        'status' => 'False',
+        'message' => 'Email already exists!'
+    ));
+}
+
 
 if ($user->create()) {
     $response = array(

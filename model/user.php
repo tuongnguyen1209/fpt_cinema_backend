@@ -161,6 +161,7 @@ class user
 
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        print_r($row);
         if (isset($row['id_user'])) {
 
             $this->id_user = $row['id_user'];
@@ -262,6 +263,22 @@ class user
             return true;
         }
         printf("Error %s.\n", $stmt->error);
+        return false;
+    }
+
+    public function checkEmailExit($email)
+    {
+        $query = "SELECT id_user FROM user WHERE EMAIL ='?'";
+        $query = "SELECT id_user, full_name, email, phone,status,administration  from user WHERE google_id=? ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (isset($row['id_user'])) {
+            return true;
+        }
         return false;
     }
 }
