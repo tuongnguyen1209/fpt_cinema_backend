@@ -12,7 +12,8 @@ if ($combo->id_combo) {
         'id_combo ' => $combo->id_combo,
         'name_combo' => $combo->name,
         'price' => $combo->price,
-        'img_combo' => $combo->image
+        'img_combo' => $combo->image,
+        'detail' => $combo->detail
 
     );
 
@@ -32,8 +33,8 @@ if ($combo->id_combo) {
                 'id_combo ' => $id_combo,
                 'name_combo' => $name,
                 'price' => $price,
-                'img_combo' => $image
-
+                'img_combo' => $image,
+                'detail' => $detail
             );
 
             array_push($combo_array['combo'], $combo_item);
