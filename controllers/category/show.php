@@ -10,7 +10,7 @@ if ($category->id_category) {
 
     $category_item = array(
         'id_category ' => $category->id_category,
-        'Tên thể loại' => $category->name
+        'Name_cate' => $category->name
     );
 
     $response = array(

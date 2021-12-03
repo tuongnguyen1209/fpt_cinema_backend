@@ -10,9 +10,9 @@ if ($combo->id_combo) {
 
     $combo_item = array(
         'id_combo ' => $combo->id_combo,
-        'Tên combo' => $combo->name,
-        'Giá tiền' => $combo->price,
-        'Hình ảnh' => $combo->image
+        'name_combo' => $combo->name,
+        'price' => $combo->price,
+        'img_combo' => $combo->image
 
     );
 
@@ -30,9 +30,9 @@ if ($combo->id_combo) {
 
             $combo_item = array(
                 'id_combo ' => $id_combo,
-                'Tên combo' => $name,
-                'Giá tiền' => $price,
-                'Hình ảnh' => $image
+                'name_combo' => $name,
+                'price' => $price,
+                'img_combo' => $image
 
             );
 

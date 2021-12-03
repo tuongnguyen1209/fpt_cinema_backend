@@ -1,52 +1,52 @@
 <?php
-    $db = new db();
-    $connect = $db->connect();
+$db = new db();
+$connect = $db->connect();
 
-    $promotion  = new promotion($connect);
-    $promotion->id_promotion  = isset($_GET['id_promotion']) ;    
-    if($promotion->id_promotion){
-        $promotion->id_promotion =$_GET['id_promotion'];
-        $promotion->show();
+$promotion  = new promotion($connect);
+$promotion->id_promotion  = isset($_GET['id_promotion']);
+if ($promotion->id_promotion) {
+    $promotion->id_promotion = $_GET['id_promotion'];
+    $promotion->show();
 
-        $promotion_item = array(
-            'id_promotion ' => $promotion->id_promotion ,
-            'Mã code giảm giá' => $promotion->code,
-            'Giá sale (%)' => $promotion->sale,
-            'Chi tiết' => $promotion->detail,
-            'ngày bắt đầu' => $promotion->date_start,
-            'ngày hết hạn' => $promotion->date_end,
-            'Số lượng mã' => $promotion->quantity
-        );
-    
-        print_r(json_encode($promotion_item));
-    }else{
-        $read = $promotion->read();
+    $promotion_item = array(
+        'id_promotion ' => $promotion->id_promotion,
+        'code_promotion' => $promotion->code,
+        'sale' => $promotion->sale,
+        'content' => $promotion->detail,
+        'day_start' => $promotion->date_start,
+        'day_end' => $promotion->date_end,
+        'quantity' => $promotion->quantity
+    );
 
-        $num = $read->rowCount();
-        if($num>0){
-            $promotion_array = [];
-            $promotion_array['promotion']=[];
+    print_r(json_encode($promotion_item));
+} else {
+    $read = $promotion->read();
 
-            while($row = $read->fetch(PDO::FETCH_ASSOC)){
-                extract($row);
+    $num = $read->rowCount();
+    if ($num > 0) {
+        $promotion_array = [];
+        $promotion_array['promotion'] = [];
 
-                $promotion_item = array(
-                    'id_promotion ' => $promotion->id_promotion ,
-                    'Mã code giảm giá' => $promotion->code,
-                    'Giá sale (%)' => $promotion->sale,
-                    'Chi tiết' => $promotion->detail,
-                    'ngày bắt đầu' => $promotion->date_start,
-                    'ngày hết hạn' => $promotion->date_end,
-                    'Số lượng mã' => $promotion->quantity
+        while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
 
-                );
+            $promotion_item = array(
+                'id_promotion ' => $promotion->id_promotion,
+                'code' => $promotion->code,
+                'sale' => $promotion->sale,
+                'content' => $promotion->detail,
+                'day_start' => $promotion->date_start,
+                'day_end' => $promotion->date_end,
+                'quantity' => $promotion->quantity
 
-                array_push($promotion_array['promotion'],$promotion_item);
-            }
-            $response = array(
-                'status' => 'success',
-                'data' => $promotion_array,
             );
-            $this->response(200, $response);
+
+            array_push($promotion_array['promotion'], $promotion_item);
         }
+        $response = array(
+            'status' => 'success',
+            'data' => $promotion_array,
+        );
+        $this->response(200, $response);
     }
+}

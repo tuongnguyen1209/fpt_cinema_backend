@@ -9,10 +9,10 @@ if ($review->id_user) {
     $review->show();
 
     $review_item = array(
-        'Họ và tên người bình luận' => $review->full_name,
-        'tên phim' => $review->name_mv,
-        'Nội dung bình luận' => $review->content,
-        'Số sao đánh giá' => $review->start
+        'name_user' => $review->full_name,
+        'name_movie' => $review->name_mv,
+        'content' => $review->content,
+        'start' => $review->start
     );
 
     $response = array(
@@ -32,9 +32,9 @@ if ($review->id_user) {
             extract($row);
 
             $review_item = array(
-                'full_name' => $full_name,
-                "name_mv" => $name_mv,
-                'Nội dung bình luận' => $content,
+                'name_user' => $full_name,
+                "name_movie" => $name_mv,
+                'content' => $content,
                 'Số sao đánh giá' => $start
             );
 
