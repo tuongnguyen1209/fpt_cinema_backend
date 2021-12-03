@@ -250,4 +250,18 @@ class user
         printf("Error %s.\n", $stmt->error);
         return false;
     }
+    public function changeAdministration()
+    {
+        $query = "UPDATE `user` SET `administration`=:administration WHERE id_user=:id_user";
+        $stmt = $this->conn->prepare($query);
+        $this->administration = htmlspecialchars(strip_tags($this->administration));
+        $this->id_user = htmlspecialchars(strip_tags($this->id_user));
+        $stmt->bindParam(':administration', $this->status);
+        $stmt->bindParam(':id_user', $this->id_user);
+        if ($stmt->execute()) {
+            return true;
+        }
+        printf("Error %s.\n", $stmt->error);
+        return false;
+    }
 }
