@@ -37,8 +37,7 @@ if ($lastID = $ticket->create()) {
 
         $ticket->createTiketCombo();
     }
-    $lastID = $connect->lastInsertId();
-    $payment = pay($lastID, 'Pay ment for ' . $lastID, $ticket->Total_money);
+    $payment = pay($ticket->id_ticket, 'Pay ment for ' . $lastID, $ticket->Total_money);
     $response = array(
         'status' => 'success',
         'data' => $ticket,
