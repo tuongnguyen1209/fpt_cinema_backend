@@ -239,4 +239,18 @@ class ticket
         printf("Error %s.\n", $stmt->error);
         return false;
     }
+
+    public function paySuccess($id_ticket)
+    {
+        $query = 'UPDATE ticket set `status`=1 WHERE id_ticket=?';
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $id_ticket);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        printf("Error %s.\n", $stmt->error);
+        return false;
+    }
 }

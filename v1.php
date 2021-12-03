@@ -235,10 +235,11 @@ class api extends  R_api
         }
     }
 
-    public function payment()
+    public function paymentsuccess()
     {
-        if ($this->method == 'POST') {
-            include_once "./controllers/payment/index.php";
+        include_once "./model/ticket.php";
+        if ($this->method == 'GET') {
+            include_once "./controllers/payment/paySuccess.php";
         }
     }
 }

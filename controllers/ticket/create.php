@@ -10,7 +10,7 @@ $ticket->Total_money = $data->Total_money;
 // $ticket->id_seat = $data->id_seat;
 $ticket->id_user = $data->id_user;
 $ticket->id_promotion = $data->id_promotion;
-$ticket->status = $data->status;
+$ticket->status = 0;
 // $ticket->id_combo = $data->id_combo;
 $ticket->ticket_information  = $data->ticket_information;
 

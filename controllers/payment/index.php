@@ -22,7 +22,7 @@ function pay($vnp_TxnRef, $vnp_OrderInfo, $vnp_Amount)
         "vnp_OrderType" => '250000',
         "vnp_ReturnUrl" => $vnp_Returnurl,
         "vnp_TxnRef" => $vnp_TxnRef,
-
+        "vnp_ExpireDate" =>  $expire
     );
 
     if (isset($vnp_BankCode) && $vnp_BankCode != "") {
