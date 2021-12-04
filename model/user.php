@@ -250,6 +250,22 @@ class user
         printf("Error %s.\n", $stmt->error);
         return false;
     }
+    public function changePass()
+    {
+        $query = "UPDATE `user` SET `password`=:pass WHERE id_user=:id_user";
+
+        $stmt = $this->conn->prepare($query);
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $stmt->bindParam(":pass", $this->password);
+        $stmt->bindParam(":id_user", $this->id_user);
+        if ($stmt->execute()) {
+
+            return true;
+        }
+        printf("Error %s.\n", $stmt->error);
+        return false;
+    }
     public function changeAdministration()
     {
         $query = "UPDATE `user` SET `administration`=:administration WHERE id_user=:id_user";

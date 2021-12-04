@@ -6,6 +6,7 @@
         public $name;
         public $price;
         public $image;
+        public $detail;
         
         public function __construct($db){
             $this->conn = $db;
@@ -31,23 +32,26 @@
             $this->name = $row['name'];
             $this->price = $row['price'];
             $this->image = $row['image'];
+            $this->detail = $row['detail'];
         
     }
 
 
         public function create(){
-            $query = "INSERT INTO combo set price=:price,name=:name,image=:image";
+            $query = "INSERT INTO combo set price=:price,name=:name,image=:image,detail=:detail";
             $stmt = $this->conn->prepare($query);
 
             // Clead Data 
             $this->name = htmlspecialchars(strip_tags($this->name));
             $this->price = htmlspecialchars(strip_tags($this->price));
             $this->image = htmlspecialchars(strip_tags($this->image));
+            $this->detail = htmlspecialchars(strip_tags($this->detail));
             
 
             $stmt->bindParam(':name' ,$this->name);
             $stmt->bindParam(':price' ,$this->price);
             $stmt->bindParam(':image' ,$this->image);
+            $stmt->bindParam(':detail' ,$this->detail);
 
             
             if($stmt->execute()){

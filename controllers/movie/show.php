@@ -38,14 +38,8 @@ if ($movie->id_movie) {
     $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
     $limit = isset($_GET["limit"]) ? $_GET["limit"] : 10;
-    $movie->date_start = isset($_GET["date_start"]) ? $_GET["date_start"] : false;
-    $movie->date_end = isset($_GET["date_end"]) ? $_GET["date_end"] : false;
-
-    if ($movie->date_start == true || $movie->date_end == true) {
-        $read = $movie->read_day();
-    } else {
-        $read = $movie->read($page, $sort,  $limit);
-    }
+    $date = isset($_GET["date"]) ? $_GET["date"] : false;
+    $read = $movie->read($page, $sort,  $limit);
     $num = $read->rowCount();
     if ($num > 0) {
         $movie_array = [];

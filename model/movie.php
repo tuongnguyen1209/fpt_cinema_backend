@@ -58,6 +58,16 @@ class Movie
         } elseif ($sort == "name_desc") {
             $query = "SELECT mv.id_movie,mv.image_lage,mv.image_medium,mv.image_banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.traller,mv.date_start,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
             FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category GROUP BY mv.name_mv order by mv.name_mv DESC LIMIT $start,$end";
+        } elseif ($sort == "sapchieu") {
+            $query = "SELECT mv.id_movie,mv.image_lage,mv.image_medium,mv.image_banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
+            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category
+            WHERE mv.date_start >= now() 
+            GROUP BY mv.id_movie order by mv.id_movie LIMIT $start,$end";
+        } elseif ($sort == "congchieu") {
+            $query = "SELECT mv.id_movie,mv.image_lage,mv.image_medium,mv.image_banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
+            FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category
+            WHERE mv.date_start < now() 
+            GROUP BY mv.id_movie order by mv.id_movie LIMIT $start,$end";
         }
         $stmt = $this->conn->prepare($query);
         // $stmt->bindParam("start", $start);
@@ -97,26 +107,6 @@ class Movie
         $this->country = $row['country'];
         $this->name_vn = $row['name_vn'];
     }
-
-    public function read_day()
-    {
-
-        // $query = "SELECT mv.id_movie,mv.image_lage,mv.image_medium,mv.image_banner,mv.country,mv.rate,mv.status,mv.production,mv.name_vn, mv.name_mv ,mv.traller,mv.date_start,mv.date_end,mv.detail,mv.actor,mv.director,mv.time_mv,(GROUP_CONCAT(ct.name SEPARATOR ', ')) as cate 
-        // FROM movie mv INNER JOIN movie_category mvct ON mv.id_movie =mvct.id_movie INNER JOIN category ct ON ct.id_category =mvct.id_category
-        // WHERE mv.date_start >= ? AND mv.date_end <= ?
-        // GROUP BY mv.id_movie order by mv.date_start";
-        $query = "call movie_day(?,?)";
-        $stmt = $this->conn->prepare($query);
-        $this->date_start = htmlspecialchars(strip_tags($this->date_start));
-        $this->date_end = htmlspecialchars(strip_tags($this->date_end));
-        $stmt->bindParam(1, $this->date_start);
-        $stmt->bindParam(2, $this->date_end);
-        $stmt->execute();
-        return $stmt;
-    }
-
-
-
     public function create()
     {
         // $query = "INSERT INTO `movie`(`name_mv`, `image_mv`, `traller`, `date_start`, `date_end`, `detail`, `actor`, `director`, `time_mv`, `banner`, `name_vn`, `status`, `country`, `production`, `rate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

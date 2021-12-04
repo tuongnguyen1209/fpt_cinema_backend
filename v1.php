@@ -183,7 +183,7 @@ class api extends  R_api
         if ($this->method == 'POST') {
             include_once "./controllers/auth/login.php";
         } else if ($this->method == 'PUT') {
-            include_once "./controllers/user/update.php";
+            include_once "./controllers/auth/changePass.php";
         }
     }
     public function tk_seat()
