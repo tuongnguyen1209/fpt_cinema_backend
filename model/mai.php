@@ -23,10 +23,10 @@ function goimail($mailc, $content)
         $mail->SMTPAuth = true; // Enable authentication
         // $nguoigui = 'phat718920@gmail.com';
         // $matkhau = '09749746790979526006';
-        // $nguoigui = 'testguiemail2020@gmail.com';
-        // $matkhau = 'guimail123';
-        $nguoigui = 'nautogame2@gmail.com';
-        $matkhau = 'gamevuilachinh';
+        $nguoigui = 'testguiemail2020@gmail.com';
+        $matkhau = 'guimail123';
+        // $nguoigui = 'nautogame2@gmail.com';
+        // $matkhau = 'gamevuilachinh';
         $tennguoigui = 'POLY CINEMA';
         $mail->Username = $nguoigui; // SMTP username
         $mail->Password = $matkhau;   // SMTP password
