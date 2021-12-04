@@ -230,7 +230,7 @@ class api extends  R_api
     public function goimail()
     {
         include_once "./model/mai.php";
-        if ($this->method == 'POST') {
+        if ($this->method == 'GET') {
             include_once "./controllers/mail/connect.php";
         }
     }
