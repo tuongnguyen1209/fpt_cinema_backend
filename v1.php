@@ -230,7 +230,7 @@ class api extends  R_api
     public function goimail()
     {
         include_once "./model/mai.php";
-        if ($this->method == 'POST') {
+        if ($this->method == 'GET') {
             include_once "./controllers/mail/connect.php";
         }
     }
@@ -240,6 +240,14 @@ class api extends  R_api
         include_once "./model/ticket.php";
         if ($this->method == 'GET') {
             include_once "./controllers/payment/paySuccess.php";
+        }
+    }
+    public function payment()
+    {
+        include_once "./model/ticket.php";
+        if ($this->method == 'GET') {
+            include_once "./controllers/payment/index.php";
+            include_once "./controllers/payment/payment.php";
         }
     }
 }

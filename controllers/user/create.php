@@ -18,8 +18,7 @@ $user->img_user = $data->img_user;
 // );
 // array_push($connect);
 
-// $connect = implode($connect);
-// goimail($user->email, $connect);
+
 // print_r($connect);
 if (
     $user->checkEmailExit($data->email)
@@ -31,17 +30,20 @@ if (
 }
 
 
-if ($user->create()) {
-    $response = array(
-        'status' => 'success',
-        'data' => $user,
-    );
+// if ($user->create()) {
+$response = array(
+    'status' => 'success',
+    'data' => $user,
+);
 
 
-    $this->response(200, $response);
-} else {
-    $this->response(401, array(
-        'status' => 'False',
-        'message' => 'lỗi'
-    ));
-}
+$content = "tên của bạn: $user->full_name, email :$user->email, số điện thoại của bạn: $user->phone";
+
+// goimail($user->email, $content);
+$this->responseAndSendMail(200, $response, $user->email, $content);
+// } else {
+//     $this->response(401, array(
+//         'status' => 'False',
+//         'message' => 'lỗi'
+//     ));
+// }

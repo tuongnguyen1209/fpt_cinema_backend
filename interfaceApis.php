@@ -80,6 +80,28 @@ class R_api
         die();
         // mysqli_close($connect);
     }
+    protected function responseAndSendMail($status_code, $data = NULL, $to, $content)
+    {
+        // header($this->_build_http_header_string($status_code));
+        // header('Content-Type: application/json; charset = utf-8;');
+        // echo json_encode($data);
+        // die();
+        header('Access-Control-Allow-Origin: *');
+
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+
+        header("Access-Control-Allow-Headers: *");
+
+        header('content-type: application/json');
+        echo json_encode($data);
+        if (isset($to) && isset($content)) {
+            include_once './model/mai.php';
+            goimail($to, $content);
+        }
+
+        die();
+        // mysqli_close($connect);
+    }
 
     /**
      * Tạo chuỗi http header

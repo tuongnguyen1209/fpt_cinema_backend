@@ -253,4 +253,15 @@ class ticket
         printf("Error %s.\n", $stmt->error);
         return false;
     }
+
+
+    public function getTotalById($id)
+    {
+        $query = "SELECT id_ticket, total_money from `ticket` WHERE id_ticket = $id";
+
+        $stmt = $this->conn->prepare($query);
+        // $stmt->bindParam(1, $this->id_ticket);
+        $stmt->execute();
+        return $stmt;
+    }
 }
