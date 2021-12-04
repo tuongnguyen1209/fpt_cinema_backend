@@ -19,4 +19,4 @@ if (isset($id_ticket)) {
     print_r('Có lỗi xảy ra');
 }
 
-// header('Location: https://fptcinema.netlify.app/member');
+header('Location: https://fptcinema.netlify.app/member');
