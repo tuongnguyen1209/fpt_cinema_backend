@@ -37,9 +37,10 @@ function goimail($mailc, $content)
 
         $mail->addAddress($to, $to_name); //mail và tên người nhận  
         $mail->isHTML(true);  // Set email format to HTML
-        $mail->Subject = 'Gửi thư từ php';
-        // $noidungthu = "<b>Chào bạn!</b><br>Chúc an lành!s";
-        $noidungthu = $content;
+        $mail->Subject = 'Gửi thư từ POLY CINEMA';
+        $noidungthu = ' <h1 style="text-align: center; color: red; ">POLY CINEMA</h1>  <hr>';
+        $noidungthu .= "<p style='padding: 20px 30px;'>$content</p>";
+        $noidungthu .= "<hr/><p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi</p>";
         $mail->Body = $noidungthu;
         $mail->smtpConnect(array(
             "ssl" => array(

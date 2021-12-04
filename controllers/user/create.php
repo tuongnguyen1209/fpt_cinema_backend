@@ -19,10 +19,8 @@ $user->img_user = $data->img_user;
 // array_push($connect);
 
 
-// print_r($connect);
-if (
-    $user->checkEmailExit($data->email)
-) {
+if ($user->checkEmailExit($data->email)) {
+
     return   $this->response(200, array(
         'status' => 'False',
         'message' => 'Email already exists!'
@@ -30,20 +28,22 @@ if (
 }
 
 
-// if ($user->create()) {
-$response = array(
-    'status' => 'success',
-    'data' => $user,
-);
+if ($user->create()) {
+    $response = array(
+        'status' => 'success',
+        'data' => $user,
+    );
 
 
-$content = "tên của bạn: $user->full_name, email :$user->email, số điện thoại của bạn: $user->phone";
+    $content = "<p>Chào mừng bạn đến với Poly Cinema</p>";
+    $content .= "<p>Đây là thông tin tài khoản của bạn</p>";
+    $content .= "<p>Họ tên: $user->full_name</p><p>Email :$user->email</p><p> số điện thoại: $user->phone</p><p>Mật khẩu: $data->password</p>";
 
-// goimail($user->email, $content);
-$this->responseAndSendMail(200, $response, $user->email, $content);
-// } else {
-//     $this->response(401, array(
-//         'status' => 'False',
-//         'message' => 'lỗi'
-//     ));
-// }
+
+    $this->responseAndSendMail(200, $response, $user->email, $content);
+} else {
+    $this->response(401, array(
+        'status' => 'False',
+        'message' => 'lỗi'
+    ));
+}

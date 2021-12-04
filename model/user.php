@@ -54,7 +54,7 @@ class user
 
     public function create($idGoogle = null, $idFacebook = null)
     {
-        $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,img_user=:img_user,create_at = now()";
+        $query = "INSERT INTO user set full_name=:full_name, email=:email, phone=:phone, password=:password,status=:status,img_user=:img_user,create_at = now(),administration=0 ";
 
         if (isset($idGoogle)) {
             $query .= "  ,google_id =$idGoogle";
@@ -283,15 +283,12 @@ class user
 
     public function checkEmailExit($email)
     {
-        $query = "SELECT id_user FROM user WHERE EMAIL ='?'";
-        $query = "SELECT id_user, full_name, email, phone,status,administration  from user WHERE google_id=? ";
+        $query = "SELECT id_user FROM user WHERE email = ?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $email);
         $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (isset($row['id_user'])) {
+        if ($stmt->rowCount()   != 0) {
             return true;
         }
         return false;
