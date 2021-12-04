@@ -30,8 +30,8 @@ function goimail($mailc, $content)
         $tennguoigui = 'POLY CINEMA';
         $mail->Username = $nguoigui; // SMTP username
         $mail->Password = $matkhau;   // SMTP password
-        $mail->SMTPSecure = 'ssl';  // encryption TLS/SSL 
-        $mail->Port = 465;  // port to connect to                
+        $mail->SMTPSecure = 'tls';  // encryption TLS/SSL 
+        $mail->Port = 587;  // port to connect to                
         $mail->setFrom($nguoigui, $tennguoigui);
         // $to = "nautogame2@gmail.com";
         $to = $mailc;
