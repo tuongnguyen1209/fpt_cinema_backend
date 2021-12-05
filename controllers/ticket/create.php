@@ -51,7 +51,7 @@ if ($lastID = $ticket->create()) {
 
     $content = '<p>Đây là mã QR code cho vé xem phim của bạn</p>';
 
-    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, 'https://cinemafptproject.herokuapp.com/v1.php/qrCode?id=$ticket->id_ticket');
+    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, "https://cinemafptproject.herokuapp.com/v1.php/qrCode?id=$ticket->id_ticket");
 } else {
     $this->response(401, array(
         'status' => 'False',
