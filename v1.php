@@ -137,7 +137,8 @@ class api extends  R_api
         if ($this->method == 'GET') {
             include_once './controllers/ticket/show.php';
         } else if ($this->method == 'POST') {
-
+            include_once './module/phpqrcode/qrlib.php';
+            include_once "./model/user.php";
             include_once "./controllers/payment/index.php";
             include_once './controllers/ticket/create.php';
         } else if ($this->method == 'PUT') {
@@ -248,6 +249,14 @@ class api extends  R_api
         if ($this->method == 'GET') {
             include_once "./controllers/payment/index.php";
             include_once "./controllers/payment/payment.php";
+        }
+    }
+    public function test()
+    {
+        include_once './module/phpqrcode/qrlib.php';
+        if ($this->method == 'GET') {
+            $path = './image/imgQrcode.png';
+            QRcode::png('polycinema/123', $path, 'L', 10);
         }
     }
 }

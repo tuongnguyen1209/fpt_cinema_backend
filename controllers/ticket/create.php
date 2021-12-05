@@ -3,6 +3,7 @@ $db = new db();
 $connect = $db->connect();
 
 $ticket = new ticket($connect);
+$user = new user($connect);
 $data = json_decode(file_get_contents("php://input"));
 
 $ticket->id_session = $data->id_session;
@@ -43,7 +44,12 @@ if ($lastID = $ticket->create()) {
         'data' => $ticket,
         'payment' => $payment
     );
-    $this->response(200, $response);
+    $content = 'QR code';
+
+    $path = './image/imgQrcode.png';
+    QRcode::png('polycinema/' . $ticket->id_ticket, $path, 'L', 10);
+
+    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, $path);
 } else {
     $this->response(401, array(
         'status' => 'False',

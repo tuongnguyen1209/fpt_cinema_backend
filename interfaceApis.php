@@ -80,7 +80,7 @@ class R_api
         die();
         // mysqli_close($connect);
     }
-    protected function responseAndSendMail($status_code, $data = NULL, $to, $content)
+    protected function responseAndSendMail($status_code, $data = NULL, $to, $content, $attachments = null)
     {
         // header($this->_build_http_header_string($status_code));
         // header('Content-Type: application/json; charset = utf-8;');
@@ -96,7 +96,8 @@ class R_api
         echo json_encode($data);
         if (isset($to) && isset($content)) {
             include_once './model/mai.php';
-            goimail($to, $content);
+
+            goimail($to, $content, $attachments);
         }
 
         die();

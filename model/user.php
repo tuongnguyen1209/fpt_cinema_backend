@@ -293,4 +293,17 @@ class user
         }
         return false;
     }
+    public function getEmailById($id)
+    {
+        $query = "SELECT email FROM user WHERE id_user = ?";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        if ($stmt->rowCount()   != 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['email'];
+        }
+        return false;
+    }
 }

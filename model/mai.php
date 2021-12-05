@@ -9,7 +9,7 @@
 //     {
 //         $this->conn = $db;
 //     }
-function goimail($mailc, $content)
+function goimail($mailc, $content, $attachments)
 {
     require "./PHPMailer-master/PHPMailer-master/src/PHPMailer.php";  //nhúng thư viện vào để dùng, sửa lại đường dẫn cho đúng nếu bạn lưu vào chỗ khác
     require "./PHPMailer-master/PHPMailer-master/src/SMTP.php"; //nhúng thư viện vào để dùng
@@ -41,6 +41,11 @@ function goimail($mailc, $content)
 
         $mail->addAddress($to, $to_name); //mail và tên người nhận  
         $mail->isHTML(true);  // Set email format to HTML
+
+        if (isset($attachments)) {
+            $mail->addAttachment($attachments);
+        }
+
         $mail->Subject = 'Gửi thư từ POLY CINEMA';
         $noidungthu = ' <h1 style="text-align: center; color: red; ">POLY CINEMA</h1>  <hr>';
         $noidungthu .= "<p style='padding: 20px 30px;'>$content</p>";
