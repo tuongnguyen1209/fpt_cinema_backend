@@ -45,17 +45,17 @@ if ($lastID = $ticket->create()) {
         'payment' => $payment
     );
 
-    $path = './image/imgQrcode.png';
-    try {
-        //code...
-        QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
-    } catch (Exception  $th) {
-        //throw $th;
-    }
+    // $path = './image/imgQrcode.png';
+    // try {
+    //     //code...
+    //     QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
+    // } catch (Exception  $th) {
+    //     //throw $th;
+    // }
 
     $content = '<p>Đây là mã QR code cho vé xem phim của bạn</p>';
 
-    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, $path);
+    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=polycinema/'$ticket->id_ticket");
 } else {
     $this->response(401, array(
         'status' => 'False',
