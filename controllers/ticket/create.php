@@ -46,12 +46,12 @@ if ($lastID = $ticket->create()) {
     );
 
 
-    $path = './image/imgQrcode.png';
-    QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
+    // $path = './image/imgQrcode.png';
+    // QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
 
     $content = '<p>Đây là mã QR code cho vé xem phim của bạn</p>';
 
-    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, $path);
+    $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, 'https://cinemafptproject.herokuapp.com/v1.php/qrCode?id=$ticket->id_ticket');
 } else {
     $this->response(401, array(
         'status' => 'False',
