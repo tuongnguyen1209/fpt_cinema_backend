@@ -45,9 +45,13 @@ if ($lastID = $ticket->create()) {
         'payment' => $payment
     );
 
-
     $path = './image/imgQrcode.png';
-    QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
+    try {
+        //code...
+        QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
+    } catch (Exception  $th) {
+        //throw $th;
+    }
 
     $content = '<p>Đây là mã QR code cho vé xem phim của bạn</p>';
 
