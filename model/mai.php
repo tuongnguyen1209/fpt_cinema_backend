@@ -59,7 +59,6 @@ function goimail($mailc, $content, $attachments = null)
             )
         ));
         $mail->send();
-        echo 'Đã gửi mail xong';
     } catch (Exception $e) {
         echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
     }
