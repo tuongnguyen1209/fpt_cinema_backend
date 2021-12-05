@@ -9,7 +9,7 @@
 //     {
 //         $this->conn = $db;
 //     }
-function goimail($mailc, $content, $attachments)
+function goimail($mailc, $content, $attachments = null)
 {
     require "./PHPMailer-master/PHPMailer-master/src/PHPMailer.php";  //nhúng thư viện vào để dùng, sửa lại đường dẫn cho đúng nếu bạn lưu vào chỗ khác
     require "./PHPMailer-master/PHPMailer-master/src/SMTP.php"; //nhúng thư viện vào để dùng
