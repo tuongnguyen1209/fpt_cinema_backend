@@ -44,10 +44,11 @@ if ($lastID = $ticket->create()) {
         'data' => $ticket,
         'payment' => $payment
     );
-    $content = 'QR code';
 
     $path = './image/imgQrcode.png';
     QRcode::png('polycinema/' . $ticket->id_ticket, $path, 'L', 10);
+
+    $content = '<p>Đây là mã QR code cho vé xem phim của bạn</p>';
 
     $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content, $path);
 } else {
