@@ -1,9 +1,0 @@
-{
-  "name": "codefresh-contrib/php-composer-sample-app",
-  "description": "Example php project for Codefresh pipelines",
-  "type": "project",
-  "require": {
-    "ext-gd": "*"
-  },
-  "authors": []
-}
