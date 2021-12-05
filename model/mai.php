@@ -16,7 +16,7 @@ function goimail($mailc, $content)
     require './PHPMailer-master/PHPMailer-master/src/Exception.php'; //nhúng thư viện vào để dùng
     $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true: enables exceptions
     try {
-        $mail->SMTPDebug = 2;  // 0,1,2: chế độ debug. khi mọi cấu hình đều tớt thì chỉnh lại 0 nhé
+        $mail->SMTPDebug = 0;  // 0,1,2: chế độ debug. khi mọi cấu hình đều tớt thì chỉnh lại 0 nhé
         $mail->isSMTP();
         $mail->CharSet  = "utf-8";
         $mail->Host = 'smtp.gmail.com';  //SMTP servers
