@@ -78,7 +78,7 @@ if ($ticket->code) {
     while ($row4 = $total->fetch(PDO::FETCH_ASSOC)) {
         $total_ticket = array("total_ticket" => $row4['total_ticket']);
     }
-    array_push($ticket_array['ticket'], $total_ticket);
+    array_push($ticket_array, $total_ticket);
     while ($row1 = $read->fetch(PDO::FETCH_ASSOC)) {
         extract($row1);
         $arr = [];
