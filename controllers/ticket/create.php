@@ -45,6 +45,7 @@ if ($lastID = $ticket->create()) {
         'payment' => $payment
     );
 
+
     $path = './image/imgQrcode.png';
     QRcode::png('polycinema/' . $ticket->id_ticket, $path, QR_ECLEVEL_L, 10);
 
