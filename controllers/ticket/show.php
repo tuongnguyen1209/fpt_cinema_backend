@@ -67,10 +67,10 @@ if ($ticket->code) {
     $this->response(200, $response);
 } else {
     // $sort = isset($_GET["sort"]) ? $_GET["sort"] : false;
-    // $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 1;
+    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 10;
 
-    $read = $ticket->read();
+    $read = $ticket->read($page, $limit);
 
     $ticket_array = [];
     $ticket_array['ticket'] = [];
