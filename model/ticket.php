@@ -48,6 +48,23 @@ class ticket
 
         return $stmt;
     }
+    public function total_ticket()
+    {
+        $query = "SELECT COUNT(id_ticket) total_ticket FROM `ticket`";
+
+        try {
+            //code...
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        } catch (Exception $e) {
+            //throw $th;
+            print_r($e);
+        }
+
+
+        return $stmt;
+    }
+
 
     public function show($type)
     {
