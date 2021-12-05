@@ -251,13 +251,5 @@ class api extends  R_api
             include_once "./controllers/payment/payment.php";
         }
     }
-    public function test()
-    {
-        include_once './module/phpqrcode/qrlib.php';
-        if ($this->method == 'GET') {
-            $path = './image/imgQrcode.png';
-            QRcode::png('polycinema/123', $path, 'L', 10);
-        }
-    }
 }
 $api = new api();
