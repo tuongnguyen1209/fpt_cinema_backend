@@ -251,7 +251,7 @@ class api extends  R_api
             include_once "./controllers/payment/payment.php";
         }
     }
-    public function qrCode()
+    public function qrcode()
     {
 
         if ($this->method == 'GET') {
