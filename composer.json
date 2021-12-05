@@ -1,6 +1,0 @@
-{
-  "name": "polycinema",
-  "require": {
-    "ext-gd": "*"
-  }
-}
