@@ -54,7 +54,7 @@ if ($lastID = $ticket->create()) {
     // }
 
     $content = '<p>Đây là mã QR code cho vé xem phim của bạn</p>';
-    $content .= '<p><img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=polycinema/' . $ticket->id_ticket . '"/></p>';
+    $content .= '<p><img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=polycinema/' . $ticket->ticket_code . '"/></p>';
 
     $this->responseAndSendMail(200, $response, $user->getEmailById($ticket->id_user), $content);
 } else {
