@@ -223,14 +223,14 @@ class user
 
     function generatePassword($length = 8)
     {
+        $num = rand();
+
+        $numMD5 = md5($num);
+
+
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $count = mb_strlen($chars);
 
-        for ($i = 0, $result = ''; $i < $length; $i++) {
-            $index = Rand(0, $count - 1);
-            $result .= mb_substr($chars, $index, 1);
-        }
-
+        $result = substr($numMD5, -3) . substr($chars, rand(0, strlen($chars) - 4), 3);
         return $result;
     }
 
