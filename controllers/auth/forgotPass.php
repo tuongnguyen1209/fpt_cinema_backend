@@ -8,7 +8,7 @@ $pass = $user->generatePassword();
 $user->password = md5($pass);
 
 if ($user->forgotPass()) {
-    goimail($user->email, $pass);
+    goimail($user->email, "Mật khẩu mới của bạn là: " . $pass);
     $response = array(
         'status' => 'success',
         'data' => $user,

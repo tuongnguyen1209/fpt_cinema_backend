@@ -202,7 +202,7 @@ class api extends  R_api
         include_once "./model/mai.php";
         include_once "./model/user.php";
         if ($this->method == 'POST') {
-            include_once "./controllers/auth/forgotpass.php";
+            include_once "./controllers/auth/forgotPass.php";
         }
     }
 
