@@ -48,5 +48,20 @@ class dasboard
         $stmt->execute();
         return $stmt;
     }
+
+    public function total_Price_By_month()
+    {
+        $squery = "SELECT SUM(ticket.Total_money) as total,concat( YEAR(ticket.time_create),'-', MONTH(ticket.time_create) ) as date FROM ticket WHERE status=1 GROUP BY YEAR(ticket.time_create), MONTH(ticket.time_create)";
+        $stmt = $this->conn->prepare($squery);
+        $stmt->execute();
+        return $stmt;
+    }
+    public function total_price_by_showtime()
+    {
+        $squery = "SELECT SUM(ticket.Total_money) total, session.id_showtimes shotime FROM ticket,session WHERE status=1 and ticket.id_session=session.id_session GROUP BY session.id_showtimes";
+        $stmt = $this->conn->prepare($squery);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 // 

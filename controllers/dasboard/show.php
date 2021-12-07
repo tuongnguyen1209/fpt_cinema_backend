@@ -26,19 +26,49 @@ $total_year = $dasboard->total_year();
 while ($row = $total_year->fetch(PDO::FETCH_ASSOC)) {
     extract($row);
 
-    $total_year_s = array("count_show_id_movie" => $sum_money);
+    $total_year_s = array("total_price" => $sum_money);
 };
 // sử lí tổng user
 $total_user = $dasboard->total_user_year_new();
 while ($row = $total_user->fetch(PDO::FETCH_ASSOC)) {
     extract($row);
 
-    $total_user_s = array("count_show_id_movie" => $user);
+    $total_user_s = array("total_user" => $user);
 };
 // xử lí doanh thu theo tháng
 
+$totalPriceByMonth = $dasboard->total_Price_By_month();
+$arrByMonth = [];
+while ($row = $totalPriceByMonth->fetch(PDO::FETCH_ASSOC)) {
 
-array_push($dasboard_array['dasboard'], $mv_Sum, $mv_sum_show, $total_year_s, $total_user_s);
+    array_push($arrByMonth, array(
+        'date' => $row['date'],
+        'total' => $row['total']
+    ));
+}
+
+$totalPriceByShowtime = $dasboard->total_price_by_showtime();
+$arrByShowtime = [];
+while ($row = $totalPriceByShowtime->fetch(PDO::FETCH_ASSOC)) {
+
+    array_push($arrByShowtime, array(
+        'shotime' => $row['shotime'],
+        'total' => $row['total']
+    ));
+}
+
+
+
+
+array_push(
+    $dasboard_array['dasboard'],
+    $mv_Sum,
+    $mv_sum_show,
+    $total_year_s,
+    $total_user_s,
+    array('price_by_month' => $arrByMonth),
+    array('price_by_showtime' => $arrByShowtime)
+);
 $response = array(
     'status' => 'success',
     'data' => $dasboard_array,

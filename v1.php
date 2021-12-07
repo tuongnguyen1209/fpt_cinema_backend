@@ -168,13 +168,6 @@ class api extends  R_api
         include_once "./model/dasboard.php";
         if ($this->method == 'GET') {
             include_once './controllers/dasboard/show.php';
-        } else if ($this->method == 'POST') {
-
-            include_once "./controllers/dasboard/create.php";
-        } else if ($this->method == 'PUT') {
-            include_once "./controllers/dasboard/update.php";
-        } else if ($this->method == 'DELETE') {
-            include_once "./controllers/dasboard/delete.php";
         }
     }
 
