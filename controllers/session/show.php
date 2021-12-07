@@ -38,7 +38,7 @@ if ($session->id_session) {
 
         $session_item = array(
             'id_session' => $id_session,
-            'name_mv' => $name_mv,
+            'name_mv' => $name_mv, 'id_movie' =>  $id_movie,
             'image_lage' => $image_lage,
             'room_number' => $name,
             'day' => $day,
@@ -68,7 +68,7 @@ if ($session->id_session) {
         $session_item = array(
             'id_movie' => $id_movie,
             'id_session' => $id_session,
-            'name_mv' => $name_mv,
+            'name_mv' => $name_mv, 'id_movie' =>  $id_movie,
             'image_lage' => $image_lage,
             'room_number' => $name,
             'day' => $day,
@@ -98,7 +98,7 @@ if ($session->id_session) {
 
             $session_item = array(
                 'id_session' => $id_session,
-                'name_mv' => $name_mv,
+                'name_mv' => $name_mv, 'id_movie' =>  $id_movie,
                 'image_lage' => $image_lage,
                 'room_number' => $name,
                 'day' => $day,

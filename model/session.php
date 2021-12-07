@@ -20,7 +20,7 @@ class session
 
     public function read()
     {
-        $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
+        $query = "SELECT se.id_session, se.day, mv.name_mv,mv.id_movie, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
             FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes order by  se.id_session desc";
 
         $stmt = $this->conn->prepare($query);
@@ -124,7 +124,7 @@ class session
 
     public function show_time()
     {
-        $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
+        $query = "SELECT se.id_session, se.day, mv.name_mv,mv.id_movie, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
             FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes
             where se.day=?
             and se.id_showtimes =? order by  se.id_session desc";
@@ -137,7 +137,7 @@ class session
     }
     public function show_mv()
     {
-        $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end,mv.id_movie
+        $query = "SELECT se.id_session, se.day, mv.name_mv,mv.id_movie, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end,mv.id_movie
             FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes
             where mv.id_movie=?
             order by  se.id_session desc";
