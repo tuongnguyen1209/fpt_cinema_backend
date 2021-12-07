@@ -10,7 +10,7 @@ $session->id_session = isset($_GET['id_session']) ? $_GET['id_session'] : die();
 if ($session->delete()) {
     $response = array(
         'status' => 'success',
-        'data' => $session,
+
     );
     $this->response(200, $response);
 } else {
