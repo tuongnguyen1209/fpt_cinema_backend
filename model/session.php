@@ -6,6 +6,7 @@ class session
     public $id_session;
     public $name_mv;
     public $name;
+    public $id_movie;
     public $time_start;
     public $time_end;
     public $type;
@@ -29,7 +30,7 @@ class session
 
     public function show()
     {
-        $query = "SELECT se.id_session, se.day, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
+        $query = "SELECT se.id_session, se.day,mv.id_movie, mv.name_mv, mv.image_lage, rm.name ,se.type , st.time_start, st.time_end
             FROM movie mv INNER JOIN session se ON mv.id_movie = se.id_movie INNER JOIN room rm ON rm.id_room = se.id_room INNER JOIN showtimes st ON st.id_showtimes = se.id_showtimes
             where se.id_session =? GROUP BY se.id_session";
 
@@ -46,6 +47,7 @@ class session
         $this->time_start = $row['time_start'];
         $this->time_end = $row['time_end'];
         $this->type = $row['type'];
+        $this->id_movie = $row['id_movie'];
     }
 
 
@@ -147,7 +149,8 @@ class session
     }
 
 
-    public function getRoomExitByDay($date){
+    public function getRoomExitByDay($date)
+    {
 
         $query = "SELECT   id_room, id_showtimes FROM  session WHERE session.day=? ";
 

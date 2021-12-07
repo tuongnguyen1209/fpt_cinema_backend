@@ -13,6 +13,7 @@ if ($session->id_session) {
     $session_item = array(
         'id_session' => $session->id_session,
         'name_mv' => $session->name_mv,
+        'id_movie' => $session->id_movie,
         'image_lage' => $session->image_lage,
         'room_number' => $session->name,
         'day' => $session->day,
@@ -55,9 +56,9 @@ if ($session->id_session) {
         'data' => $session_array,
     );
     $this->response(200, $response);
-} elseif($session->id_movie){
+} elseif ($session->id_movie) {
     $session->id_movie = ($_GET['id_movie']);
-    $show_mv=$session->show_mv();
+    $show_mv = $session->show_mv();
     $session_array = [];
     $session_array['session'] = [];
 
@@ -85,8 +86,7 @@ if ($session->id_session) {
         'data' => $session_array,
     );
     $this->response(200, $response);
-
-}else {
+} else {
     $read = $session->read();
     $num = $read->rowCount();
     if ($num > 0) {
