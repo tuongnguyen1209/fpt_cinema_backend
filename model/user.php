@@ -272,7 +272,7 @@ class user
         $stmt = $this->conn->prepare($query);
         $this->administration = htmlspecialchars(strip_tags($this->administration));
         $this->id_user = htmlspecialchars(strip_tags($this->id_user));
-        $stmt->bindParam(':administration', $this->status);
+        $stmt->bindParam(':administration', $this->administration);
         $stmt->bindParam(':id_user', $this->id_user);
         if ($stmt->execute()) {
             return true;

@@ -260,5 +260,12 @@ class api extends  R_api
             QRcode::png('polycinema/' . $id, false, QR_ECLEVEL_L, 10);
         }
     }
+    public function changePq()
+    {
+        include_once "./model/user.php";
+        if ($this->method == 'PUT') {
+            include_once "./controllers/user/ministration.php";
+        }
+    }
 }
 $api = new api();
