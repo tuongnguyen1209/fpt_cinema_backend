@@ -10,12 +10,13 @@ if (isset($_GET['type'])) {
     $type = $_GET['type'];
     if ($type == 'month') {
         $month = isset($_GET['month']) ? $_GET['month'] : null;
-        if (!isset($month)) $this->response(200, array(
+        $year = isset($_GET['year']) ? $_GET['year'] : null;
+        if (!isset($month) || !isset($year)) $this->response(200, array(
             'status' => 'False',
             'message' => 'Mising params month'
         ));
 
-        $listPirce = $dasboard->price_day_by_Month($month);
+        $listPirce = $dasboard->price_day_by_Month($month, $year);
         $arr = [];
         while ($row = $listPirce->fetch(PDO::FETCH_ASSOC)) {
 
