@@ -23,7 +23,7 @@ if (isset($_GET['type'])) {
             // tổng số các bộ phim đang chiếu
             array_push($arr, array(
                 "date" => $row['date'],
-                "total" => $row['total']
+                "total" => (float) $row['total']
             ));
         }
         $this->response(200, array(
@@ -46,7 +46,7 @@ if (isset($_GET['type'])) {
             // tổng số các bộ phim đang chiếu
             array_push($arr, array(
                 "date" => $row['date'],
-                "total" => $row['total']
+                "total" => (float) $row['total']
             ));
         }
         $this->response(200, array(
@@ -96,7 +96,7 @@ while ($row = $totalPriceByMonth->fetch(PDO::FETCH_ASSOC)) {
 
     array_push($arrByMonth, array(
         'date' => $row['date'],
-        'total' => $row['total']
+        'total' => (float) $row['total']
     ));
 }
 
@@ -106,7 +106,7 @@ while ($row = $totalPriceByShowtime->fetch(PDO::FETCH_ASSOC)) {
 
     array_push($arrByShowtime, array(
         'shotime' => $row['shotime'],
-        'total' => $row['total']
+        'total' => (float) $row['total']
     ));
 }
 
