@@ -28,7 +28,7 @@ class dasboard
     }
     public function total_year()
     {
-        $squery = "SELECT SUM(Total_money) as sum_money FROM `ticket`";
+        $squery = "SELECT SUM(Total_money) as sum_money FROM `ticket` WHERE status = 1 ";
         $stmt = $this->conn->prepare($squery);
         $stmt->execute();
         return $stmt;
