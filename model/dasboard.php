@@ -63,5 +63,20 @@ class dasboard
         $stmt->execute();
         return $stmt;
     }
+
+    public function price_day_by_Month($month)
+    {
+        $squery = "SELECT SUM(ticket.Total_money) as total,concat( YEAR(ticket.time_create),'-', MONTH(ticket.time_create),'-', day(ticket.time_create) ) as date FROM ticket WHERE status=1 and MONTH(ticket.time_create)=$month GROUP BY YEAR(ticket.time_create), MONTH(ticket.time_create), day(ticket.time_create)";
+        $stmt = $this->conn->prepare($squery);
+        $stmt->execute();
+        return $stmt;
+    }
+    public function price_day_by_Date($start, $end)
+    {
+        $squery = "SELECT SUM(ticket.Total_money) as total,concat( YEAR(ticket.time_create),'-', MONTH(ticket.time_create),'-', day(ticket.time_create) ) as date FROM ticket WHERE status=1 and ticket.time_create>= '$start' and ticket.time_create<='$end' GROUP BY YEAR(ticket.time_create), MONTH(ticket.time_create), day(ticket.time_create)";
+        $stmt = $this->conn->prepare($squery);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 // 

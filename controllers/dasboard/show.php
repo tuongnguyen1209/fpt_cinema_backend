@@ -4,6 +4,58 @@ $connect = $db->connect();
 
 $dasboard = new dasboard($connect);
 
+
+
+if (isset($_GET['type'])) {
+    $type = $_GET['type'];
+    if ($type == 'month') {
+        $month = isset($_GET['month']) ? $_GET['month'] : null;
+        if (!isset($month)) $this->response(200, array(
+            'status' => 'False',
+            'message' => 'Mising params month'
+        ));
+
+        $listPirce = $dasboard->price_day_by_Month($month);
+        $arr = [];
+        while ($row = $listPirce->fetch(PDO::FETCH_ASSOC)) {
+
+            // tổng số các bộ phim đang chiếu
+            array_push($arr, array(
+                "date" => $row['date'],
+                "total" => $row['total']
+            ));
+        }
+        $this->response(200, array(
+            'status' => 'Success',
+            'static' => $arr
+        ));
+    } else if ($type == 'date') {
+        $start = isset($_GET['start']) ? $_GET['start'] : null;
+        $end = isset($_GET['end']) ? $_GET['end'] : null;
+        if (!isset($start) || !isset($end)) $this->response(200, array(
+            'status' => 'False',
+            'message' => 'Mising params, please check again'
+        ));
+
+        $listPirce = $dasboard->price_day_by_Date($start, $end);
+        $arr = [];
+
+        while ($row = $listPirce->fetch(PDO::FETCH_ASSOC)) {
+
+            // tổng số các bộ phim đang chiếu
+            array_push($arr, array(
+                "date" => $row['date'],
+                "total" => $row['total']
+            ));
+        }
+        $this->response(200, array(
+            'status' => 'Success',
+            'static' => $arr
+        ));
+    }
+}
+
+
 $movie_sum = $dasboard->movie_sum();
 $num = $movie_sum->rowCount();
 $dasboard_array = [];
