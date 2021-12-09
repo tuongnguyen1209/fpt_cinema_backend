@@ -159,4 +159,15 @@ class session
         $stmt->execute();
         return $stmt;
     }
+
+    public function getSessionByMovie()
+    {
+        $date =  gmdate("Y-m-d");
+        $newdate = strtotime('+7 day', strtotime($date));
+        $newdate = date('Y-m-d', $newdate);
+        $query = "SELECT movie.id_movie, movie.name_mv,movie.image_lage,movie.image_medium, session.id_session, session.id_room, session.day, session.id_showtimes,session.type,showtimes.time_start,showtimes.time_end FROM session, movie ,showtimes WHERE session.id_movie = movie.id_movie AND session.id_showtimes=showtimes.id_showtimes AND session.day>='$date' AND session.day<= '$newdate' ORDER BY movie.id_movie";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
 }
