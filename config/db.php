@@ -13,7 +13,7 @@ class db
         $this->username = "sql6457581";
         $this->password = "EkxgFv4cD7";
         $this->host = "sql6.freesqldatabase.com";
-        $this->database =  "sql6455895";
+        $this->database =  "sql6457581";
 
         // $this->username = "root";
         // $this->password =  "";
