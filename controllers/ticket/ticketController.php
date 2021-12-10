@@ -8,18 +8,18 @@ if ($this->method === 'PUT') {
         $ticket = new ticket($connect);
         if (!isset($this->params[1])) {
             $this->response(200, array(
-                'Status' => 'False',
+                'status' => 'False',
                 'Message' => 'Missing id ticket'
             ));
         }
 
         if ($ticket->conformGetTicket($this->params[1])) {
             $this->response(200, array(
-                'Status' => 'Success',
+                'status' => 'Success',
             ));
         } else {
             $this->response(200, array(
-                'Status' => 'False',
+                'status' => 'False',
                 'Message' => 'Have some error'
             ));
         }
