@@ -40,7 +40,7 @@ class R_api
             case 'GET': //đã lấy thẳng từ url nên không cần nhận
                 break;
             case 'PUT':
-                $this->params = file_get_contents("php://input");
+                $this->file = file_get_contents("php://input");
                 break;
             case 'DELETE': //đã lấy thẳng từ url nên không cần nhận
                 break;
