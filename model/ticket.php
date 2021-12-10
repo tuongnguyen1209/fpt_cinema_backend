@@ -283,4 +283,18 @@ class ticket
         $stmt->execute();
         return $stmt;
     }
+
+    public function conformGetTicket($id)
+    {
+        $query = "UPDATE `ticket` SET `status`='2' WHERE id_ticket=$id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

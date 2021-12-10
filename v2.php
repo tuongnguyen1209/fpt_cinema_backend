@@ -23,6 +23,19 @@ class apiv2 extends R_api
             ));
         }
     }
+    public function ticket()
+    {
+        try {
+            include_once './model/ticket.php';
+
+            include_once './controllers/ticket/ticketController.php';
+        } catch (Exception $e) {
+            $this->response(200, array(
+                'status' => 'False',
+                'message' => 'Opps, have error!'
+            ));
+        }
+    }
 }
 
 $api = new apiv2();
