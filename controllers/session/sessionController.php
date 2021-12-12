@@ -5,7 +5,6 @@ function checkItemInArr($arr = [], $item, $key)
     for ($i = count($arr) - 1; $i >= 0; $i--) {
 
         if ($arr[$i][$key] == $item) {
-            echo 'vo day ' . $i, '<br>';
             return $i;
         }
 
