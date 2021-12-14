@@ -33,7 +33,7 @@ if ($combo->id_combo) {
                 'id_combo ' => $id_combo,
                 'name_combo' => $name,
                 'price' => $price,
-                'img_combo' => $image,
+                'lmage' => $Image,
                 'detail' => $detail
             );
 
