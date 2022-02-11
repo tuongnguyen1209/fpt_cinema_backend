@@ -10,10 +10,10 @@ class db
 
     public  function __construct()
     {
-        $this->username = "sql6457581";
-        $this->password = "EkxgFv4cD7";
+        $this->username = "sql671992";
+        $this->password = "tAnhy1uKES";
         $this->host = "sql6.freesqldatabase.com";
-        $this->database =  "sql6457581";
+        $this->database =  "sql671992";
 
         // $this->username = "root";
         // $this->password =  "";
